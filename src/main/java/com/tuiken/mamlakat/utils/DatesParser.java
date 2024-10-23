@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class DatesParser {
 
-    public Instant[] findTwoDates(String source) {
+    public static Instant[] findTwoDates(String source) {
         String regex = "\\d{1,2}\\s(January|February|March|April|May|June|July|August|September|October|November|December)\\s\\d{3,4}";
 
         List<String> allMatches = new ArrayList<>();
@@ -128,7 +128,7 @@ public class DatesParser {
 
     }
 
-    public Instant findDate(String source) {
+    public static Instant findDate(String source) {
         if (source == null) return null;
         String regex = "(\\d{1,2}\\s(January|February|March|April|May|June|July|August|September|October|November|December)\\s\\d{4})";
         Matcher matcher = Pattern.compile(regex).matcher(source);
