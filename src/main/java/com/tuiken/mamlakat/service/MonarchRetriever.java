@@ -21,8 +21,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class MonarchRetriever {
 
-    DatesParser datesParser = new DatesParser();
-
     private final WikiService wikiService;
     private final PersonRetriever personRetriever;
     private final MonarchService monarchService;
@@ -60,7 +58,7 @@ public class MonarchRetriever {
         }
         for (int i = 0; i < reign.size(); i++) {
             String reignline = JsonUtils.readValue(reign.get(i));
-            Instant[] reignDates = datesParser.findTwoDates(reignline);
+            Instant[] reignDates = DatesParser.findTwoDates(reignline);
             Reign r = new Reign();
             r.setCountry(country);
             r.setStart(reignDates[0]);
@@ -68,7 +66,7 @@ public class MonarchRetriever {
             List<JSONObject> corona = JsonUtils.drillForName(list, "Coronation");
             if (corona.size() == 1) {
                 String coronationLine = JsonUtils.readValue(corona.get(0));
-                r.setCoronation(datesParser.findDate(coronationLine));
+                r.setCoronation(DatesParser.findDate(coronationLine));
             }
             r.setTitle(retrieveTitle(jsonArray, country));
             retval.add(r);

@@ -32,12 +32,10 @@ public class PersonRetriever {
         List<JSONObject> list = JsonUtils.arrayTolist(jsonArray);
         List<JSONObject> dates = JsonUtils.drillForName(list, key);
 
-        DatesParser datesParser = new DatesParser();
-
         return dates.stream()
                 .map(o -> JsonUtils.readValue(o))
                 .filter(Objects::nonNull)
-                .map(s -> datesParser.findDate(s))
+                .map(s -> DatesParser.findDate(s))
                 .filter(Objects::nonNull)
                 .findFirst().orElse(null);
     }
@@ -61,12 +59,11 @@ public class PersonRetriever {
     public Reign retrieveReign(JSONArray jsonArray, Country country) {
         List<JSONObject> list = JsonUtils.arrayTolist(jsonArray);
         List<JSONObject> reign = JsonUtils.drillForName(list, "Reign");
-        DatesParser datesParser = new DatesParser();
 
         Instant[] datesReign = reign.stream()
                 .map(o -> JsonUtils.readValue(o))
                 .filter(Objects::nonNull)
-                .map(s -> datesParser.findTwoDates(s))
+                .map(s -> DatesParser.findTwoDates(s))
                 .filter(Objects::nonNull)
                 .findFirst().orElse(null);
 
@@ -79,7 +76,7 @@ public class PersonRetriever {
             Instant coronationDate = reign.stream()
                     .map(o -> JsonUtils.readValue(o))
                     .filter(Objects::nonNull)
-                    .map(s -> datesParser.findDate(s))
+                    .map(s -> DatesParser.findDate(s))
                     .filter(Objects::nonNull)
                     .findFirst().orElse(null);
             retval.setCoronation(coronationDate);
