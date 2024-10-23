@@ -1,5 +1,0 @@
-{
-  "filters": [
-    {"field":"is_part_of.identifier","value":"enwiki"}
-  ]
-}

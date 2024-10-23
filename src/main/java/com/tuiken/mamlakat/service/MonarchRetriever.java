@@ -1,5 +1,6 @@
 package com.tuiken.mamlakat.service;
 
+import com.tuiken.mamlakat.exceptions.WikiApiException;
 import com.tuiken.mamlakat.model.*;
 import com.tuiken.mamlakat.utils.DatesParser;
 import com.tuiken.mamlakat.utils.JsonUtils;
@@ -25,7 +26,7 @@ public class MonarchRetriever {
     private final PersonRetriever personRetriever;
     private final MonarchService monarchService;
 
-    public String retrievePredecessor(JSONArray jsonArray, Country country) throws IOException, URISyntaxException {
+    public String retrievePredecessor(JSONArray jsonArray, Country country) {
         List<JSONObject> list = JsonUtils.extendParts(JsonUtils.readInfoboxes(jsonArray));
         list = list.stream().filter(o -> o.has("name") && country.belongs((String) o.get("name"))).collect(Collectors.toList());
         if (list.size() > 1) {
@@ -46,7 +47,7 @@ public class MonarchRetriever {
         return null;
     }
 
-    public List<Reign> retrieveReigns(JSONArray jsonArray, Country country) throws IOException, URISyntaxException {
+    public List<Reign> retrieveReigns(JSONArray jsonArray, Country country) {
 
         List<JSONObject> list = JsonUtils.extendParts(JsonUtils.readInfoboxes(jsonArray));
         List<Reign> retval = new ArrayList<>();
@@ -88,7 +89,7 @@ public class MonarchRetriever {
         return JsonUtils.drillForName(list, keyword);
     }
 
-    public String retrieveTitle(JSONArray jsonArray, Country country) throws IOException, URISyntaxException {
+    public String retrieveTitle(JSONArray jsonArray, Country country) {
         List<JSONObject> list = JsonUtils.extendParts(JsonUtils.readInfoboxes(jsonArray));
         list = list.stream().filter(o -> o.has("name") && country.belongs((String) o.get("name"))).collect(Collectors.toList());
         if (list.size() > 1) {
@@ -109,11 +110,16 @@ public class MonarchRetriever {
     }
 
     @Transactional
-    public void repairMonarch(String monarchId, Country country) throws IOException, URISyntaxException {
+    public void repairMonarch(String monarchId, Country country) {
 
         Monarch person = monarchService.loadMonarch(UUID.fromString(monarchId));
         if (person != null) {
-            JSONArray jsonArray = wikiService.read(person.getUrl());
+            JSONArray jsonArray = null;
+            try {
+                jsonArray = wikiService.read(person.getUrl());
+            } catch (WikiApiException e) {
+                return;
+            }
             List<JSONObject> infoboxes = JsonUtils.arrayTolist(JsonUtils.readInfoboxes(jsonArray).get(0).getJSONArray("has_parts"));
 //            if (infoboxes.size()>1) {
 //                person.setTitle(infoboxes.get(1).getString("name"));

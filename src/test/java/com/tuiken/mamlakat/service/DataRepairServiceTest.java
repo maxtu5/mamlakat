@@ -1,5 +1,6 @@
 package com.tuiken.mamlakat.service;
 
+import com.tuiken.mamlakat.exceptions.WikiApiException;
 import com.tuiken.mamlakat.model.Country;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -23,7 +24,7 @@ class DataRepairServiceTest {
     }
 
     @Test
-    public void reloadReigns() throws IOException, URISyntaxException {
+    public void reloadReigns() {
         Country country = Country.SPAIN;
         String url = "https://en.wikipedia.org/wiki/Christian_II_of_Denmark";
         dataRepairService.reloadReigns(url, country);
@@ -37,12 +38,12 @@ class DataRepairServiceTest {
     }
 
     @Test
-    public void repairHouses1() throws IOException, URISyntaxException {
+    public void repairHouses1() throws WikiApiException {
         dataRepairService.printMissingHouses();
     }
 
     @Test
-    public void repairHouses2() throws IOException, URISyntaxException {
+    public void repairHouses2() throws WikiApiException {
         dataRepairService.repairHouses();
     }
 
@@ -52,7 +53,7 @@ class DataRepairServiceTest {
     }
 
     @Test
-    public void insertMonarchInThrone() throws IOException, URISyntaxException {
+    public void insertMonarchInThrone() throws WikiApiException {
         Country country = Country.SPAIN;
         String urlToInsert = "https://en.wikipedia.org/wiki/Philip_V_of_Spain";
         String urlInsertAfter = "https://en.wikipedia.org/wiki/Louis_I_of_Spain";

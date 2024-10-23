@@ -1,6 +1,7 @@
 package com.tuiken.mamlakat.service;
 
 import com.tuiken.mamlakat.builders.PersonBuilder;
+import com.tuiken.mamlakat.exceptions.WikiApiException;
 import com.tuiken.mamlakat.model.*;
 import com.tuiken.mamlakat.model.dtos.Throne;
 import com.tuiken.mamlakat.utils.JsonUtils;
@@ -31,10 +32,15 @@ public class DataRepairService {
     private final FamilyRetriever familyRetriever;
 
     @Transactional
-    public boolean reloadReigns(String url, Country country) throws IOException, URISyntaxException {
+    public boolean reloadReigns(String url, Country country) {
         Monarch monarch = monarchService.findByUrl(url);
         if (monarch != null) {
-            JSONArray jsonArray = wikiService.read(url);
+            JSONArray jsonArray = null;
+            try {
+                jsonArray = wikiService.read(url);
+            } catch (WikiApiException e) {
+                return false;
+            }
             List<Reign> reigns = monarchRetriever.retrieveReigns(jsonArray, country);
             if (!reigns.isEmpty()) {
                 List<Reign> clearedReigns = monarch.getReigns().stream()
@@ -62,8 +68,14 @@ public class DataRepairService {
                 }
             });
             System.out.println();
-            JSONArray jsonArray = wikiService.read(monarch.getUrl());
-            List<Monarch> issue = familyRetriever.extractIssueFromWikiValidatedWithCreate(jsonArray, monarch, countryJustForAi);
+            JSONArray jsonArray = null;
+            List<Monarch> issue = null;
+            try {
+                jsonArray = wikiService.read(monarch.getUrl());
+                issue = familyRetriever.extractIssueFromWikiValidatedWithCreate(jsonArray, monarch, countryJustForAi);
+            } catch (WikiApiException e) {
+                throw new RuntimeException(e);
+            }
             issue.forEach(m-> {
                 if (!provenences.stream().map(Provenence::getId).anyMatch(id->id.equals(m.getId()))) {
                     Provenence newProvenence = new Provenence(m.getId());
@@ -79,7 +91,7 @@ public class DataRepairService {
     }
 
     @Transactional
-    public void printMissingHouses() throws URISyntaxException, IOException {
+    public void printMissingHouses() throws WikiApiException {
         List<Monarch> allPeople = monarchService.loadAllMonarchs();
         Set<String> allHouses = new HashSet<>();
         for (Monarch monarch : allPeople) {
@@ -112,7 +124,7 @@ public class DataRepairService {
     }
 
     @Transactional
-    public void repairHouses() throws IOException, URISyntaxException {
+    public void repairHouses() throws WikiApiException {
         List<Monarch> allPeople = monarchService.loadAllMonarchs();
         for (Monarch monarch : allPeople) {
             if (monarch.getHouse().isEmpty()) {
@@ -282,7 +294,7 @@ public class DataRepairService {
     }
 
     @Transactional
-    public void insertMonarchInThrone(Country country, String urlToInsert, String urlInsertAfter) throws IOException, URISyntaxException {
+    public void insertMonarchInThrone(Country country, String urlToInsert, String urlInsertAfter) throws WikiApiException {
         Throne throne = throneRoom.loadThroneByCountry(country);
         Monarch monarchToInsert = monarchService.findByUrl(urlToInsert);
         if (monarchToInsert==null) {
@@ -334,7 +346,7 @@ public class DataRepairService {
         return toDelete.size();
     }
 
-    public void provenanceCheckParents() throws IOException, URISyntaxException {
+    public void provenanceCheckParents() throws WikiApiException {
         List<Provenence> provenences = new ArrayList<>();
         provenanceService.findAllProvenances().forEach(provenences::add);
         List<Provenence> toDelete = new ArrayList<>();

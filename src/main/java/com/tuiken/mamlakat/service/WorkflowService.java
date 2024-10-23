@@ -4,6 +4,7 @@ import com.tuiken.mamlakat.builders.PersonBuilder;
 import com.tuiken.mamlakat.dao.ProvenenceRepository;
 import com.tuiken.mamlakat.dao.ThroneRepository;
 import com.tuiken.mamlakat.dao.WikiCacheRecordRepository;
+import com.tuiken.mamlakat.exceptions.WikiApiException;
 import com.tuiken.mamlakat.model.*;
 import com.tuiken.mamlakat.model.dtos.Throne;
 import com.tuiken.mamlakat.model.workflows.LoadFamilyConfiguration;
@@ -44,7 +45,7 @@ public class WorkflowService {
     // ============== ADD DATA ========================
 
     @Transactional
-    public UUID createThrone(Country country, String latestMonarchUrl, String name) throws IOException, URISyntaxException {
+    public UUID createThrone(Country country, String latestMonarchUrl, String name) throws WikiApiException {
         Throne throne = throneRoom.createThrone(country, name);
 
         Monarch monarch = personBuilder.findOrCreateOptionalSave(latestMonarchUrl, country, true);
@@ -58,7 +59,7 @@ public class WorkflowService {
     }
 
     @Transactional
-    public void addToThroneLoop(Country country) throws IOException, URISyntaxException {
+    public void addToThroneLoop(Country country) throws WikiApiException {
         Throne throne = throneRoom.loadThroneByCountry(country);
         if (throne != null && throne.getMonarchsIds().size() > 0) {
             Monarch lastMonarch = monarchService.loadMonarch(
@@ -83,13 +84,18 @@ public class WorkflowService {
     }
 
     @Transactional
-    public UUID addToThroneNext(Country country) throws IOException, URISyntaxException {
+    public UUID addToThroneNext(Country country) throws WikiApiException {
         Throne throne = throneRoom.loadThroneByCountry(country);
         if (throne != null && throne.getMonarchsIds().size() > 0) {
             Monarch lastMonarch = monarchService.loadMonarch(
                     UUID.fromString(throne.getMonarchsIds().get(throne.getMonarchsIds().size() - 1)));
             System.out.println("Latest ruler is " + lastMonarch.getName());
-            JSONArray jsonArray = wikiService.read(lastMonarch.getUrl());
+            JSONArray jsonArray = null;
+            try {
+                jsonArray = wikiService.read(lastMonarch.getUrl());
+            } catch (WikiApiException e) {
+                return null;
+            }
             String predecessorUrl = monarchRetriever.retrievePredecessor(jsonArray, country);
 
             if (Strings.isNotBlank(predecessorUrl)) {
@@ -104,7 +110,7 @@ public class WorkflowService {
     }
 
     @Transactional
-    public void addToThroneByUrl(String url, Country country) throws IOException, URISyntaxException {
+    public void addToThroneByUrl(String url, Country country) throws WikiApiException {
         Throne throne = throneRoom.loadThroneByCountry(country);
         if (throne != null) {
             Monarch monarch = personBuilder.findOrCreateOptionalSave(url, country, true);
@@ -114,7 +120,7 @@ public class WorkflowService {
     }
 
     @Transactional
-    public void resolveFamilyNext(Country country) throws IOException, URISyntaxException {
+    public void resolveFamilyNext(Country country) throws WikiApiException {
         Throne throne = throneRoom.loadThroneByCountry(country);
         if (throne != null && throne.getMonarchsIds().size()>0) {
             Monarch latest = monarchService.loadMonarch(UUID.fromString(throne.getMonarchsIds().get(0)));
@@ -268,13 +274,18 @@ public class WorkflowService {
         }
     }
 
-    public void cleanWrongParents() throws IOException, URISyntaxException {
+    public void cleanWrongParents() {
         List<Provenence> provenences = new ArrayList<>();
         provenenceRepository.findAll().forEach(provenences::add);
 
         for (Provenence provenence : provenences) {
             Monarch monarch = monarchService.loadMonarch(provenence.getId());
-            JSONArray jsonArray = wikiService.read(monarch.getUrl());
+            JSONArray jsonArray = null;
+            try {
+                jsonArray = wikiService.read(monarch.getUrl());
+            } catch (WikiApiException e) {
+                return;
+            }
             List<JSONObject> infoboxes = JsonUtils.readInfoboxes(jsonArray);
 
             if (provenence.getFather() != null) {

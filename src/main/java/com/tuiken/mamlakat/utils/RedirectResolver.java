@@ -12,7 +12,7 @@ public class RedirectResolver {
     private static final String REDIRECT_URL = "https://en.wikipedia.org/w/api.php?action=query&format=json&titles=%s&redirects=1&formatversion=2";
     private static final String PUBLIC_URL_TEMPLATE = "https://en.wikipedia.org/wiki/ANY";
 
-    public String resolve(String url) throws IOException {
+    public String resolve(String url) {
         RestTemplate restTemplate = new RestTemplate();
         String title = extractTitle(url);
         String redirectUrl = String.format(REDIRECT_URL, title);
