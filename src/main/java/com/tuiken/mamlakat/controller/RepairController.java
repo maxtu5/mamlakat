@@ -1,11 +1,9 @@
 package com.tuiken.mamlakat.controller;
 
+import com.tuiken.mamlakat.exceptions.WikiApiException;
 import com.tuiken.mamlakat.service.DataRepairService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
-import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping("/repair")
@@ -21,7 +19,7 @@ public class RepairController {
     }
 
     @GetMapping(path = "/prov/checkparents")
-    public void provenanceCheckParents() throws IOException, URISyntaxException {
+    public void provenanceCheckParents() throws WikiApiException {
         dataRepairService.provenanceCheckParents();
     }
 

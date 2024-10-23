@@ -2,6 +2,7 @@ package com.tuiken.mamlakat.service;
 
 import com.tuiken.mamlakat.builders.PersonBuilder;
 import com.tuiken.mamlakat.dao.ProvenenceRepository;
+import com.tuiken.mamlakat.exceptions.WikiApiException;
 import com.tuiken.mamlakat.model.*;
 import com.tuiken.mamlakat.model.workflows.LoadFamilyConfiguration;
 import com.tuiken.mamlakat.model.workflows.SaveFamilyConfiguration;
@@ -39,7 +40,7 @@ public class FamilyRetriever {
     private final PersonBuilder personBuilder;
 
     public LoadFamilyConfiguration createLoadFamilyConfiguration(Monarch root, Country rootCountry)
-            throws IOException, URISyntaxException {
+            throws WikiApiException {
 
         LoadFamilyConfiguration configuration = LoadFamilyConfiguration.builder()
                 .rootId(root.getId())
@@ -91,7 +92,7 @@ public class FamilyRetriever {
         return configuration;
     }
 
-    public List<Monarch> extractIssueFromWikiValidatedWithCreate(JSONArray jsonArray, Monarch root, Country rootCountry) throws IOException, URISyntaxException {
+    public List<Monarch> extractIssueFromWikiValidatedWithCreate(JSONArray jsonArray, Monarch root, Country rootCountry) throws WikiApiException {
         List<JSONObject> infoboxes = JsonUtils.readInfoboxes(jsonArray);
         List<JSONObject> issue = JsonUtils.drillForName(infoboxes, "Issue detail", "Issue", "Issue more...", "Illegitimate children Detail", "Issue among others...", "Illegitimate children more...");
 
@@ -105,8 +106,8 @@ public class FamilyRetriever {
                     .map(u -> {
                         try {
                             return personBuilder.findOrCreateOptionalSave(u, null, true);
-                        } catch (IOException | URISyntaxException e) {
-                            return null;
+                        } catch (WikiApiException e) {
+                            throw new RuntimeException(e);
                         }
                     })
                     .filter(Objects::nonNull)
@@ -118,7 +119,7 @@ public class FamilyRetriever {
         }
     }
 
-    private List<Monarch> smartExtractWithCreate(JSONArray jsonArray, Monarch root, Country rootCountry) throws IOException, URISyntaxException {
+    private List<Monarch> smartExtractWithCreate(JSONArray jsonArray, Monarch root, Country rootCountry) throws WikiApiException {
         List<JSONObject> infoboxes = JsonUtils.readInfoboxes(jsonArray);
         List<JSONObject> issue = JsonUtils.drillForName(infoboxes, "Issue detail", "Issue", "Issue more...", "Illegitimate children Detail", "Issue among others...", "Illegitimate children more...");
         Set<String> allLinks = JsonUtils.readAllLinks(jsonArray).stream()
@@ -159,7 +160,7 @@ public class FamilyRetriever {
         return retval;
     }
 
-    private boolean checkParent(Monarch monarch, Monarch parent) throws IOException, URISyntaxException {
+    private boolean checkParent(Monarch monarch, Monarch parent) throws WikiApiException {
         JSONArray jsonArray = wikiService.read(monarch.getUrl());
         List<JSONObject> infoboxes = JsonUtils.readInfoboxes(jsonArray);
         if (parent.getGender().equals(Gender.MALE)) {

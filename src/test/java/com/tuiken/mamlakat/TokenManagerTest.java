@@ -1,5 +1,6 @@
 package com.tuiken.mamlakat;
 
+import com.tuiken.mamlakat.exceptions.WikiApiException;
 import com.tuiken.mamlakat.utils.TokenManager;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -17,12 +18,12 @@ class TokenManagerTest {
     private TokenManager tokenManager;
 
     @Test
-    void refresh() throws URISyntaxException {
+    void refresh() throws WikiApiException {
         tokenManager.refresh();
     }
 
     @Test
-    void getToken() throws URISyntaxException, IOException {
+    void getToken() throws WikiApiException {
         String token = tokenManager.getToken();
         System.out.println(token);
     }

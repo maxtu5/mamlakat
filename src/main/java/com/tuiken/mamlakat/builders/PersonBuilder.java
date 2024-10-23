@@ -1,5 +1,6 @@
 package com.tuiken.mamlakat.builders;
 
+import com.tuiken.mamlakat.exceptions.WikiApiException;
 import com.tuiken.mamlakat.model.*;
 import com.tuiken.mamlakat.service.MonarchRetriever;
 import com.tuiken.mamlakat.service.MonarchService;
@@ -31,7 +32,7 @@ public class PersonBuilder {
         JSONArray jsonArray = null;
         try {
             jsonArray = wikiService.read(url);
-        } catch (IOException | URISyntaxException e) {
+        } catch (WikiApiException e) {
             return null;
         }
         if (jsonArray==null || JsonUtils.readInfoboxes(jsonArray).size()==0) return null;
@@ -49,7 +50,7 @@ public class PersonBuilder {
         return person;
     }
 
-    public Monarch findOrCreateOptionalSave(String url, Country country, boolean save) throws IOException, URISyntaxException {
+    public Monarch findOrCreateOptionalSave(String url, Country country, boolean save) throws WikiApiException {
         RedirectResolver resolver = new RedirectResolver();
         String resolvedUrl = resolver.resolve(url);
         System.out.println("Reading from source: " + resolvedUrl);

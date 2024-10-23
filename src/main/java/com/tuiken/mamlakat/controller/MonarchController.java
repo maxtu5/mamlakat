@@ -1,5 +1,6 @@
 package com.tuiken.mamlakat.controller;
 
+import com.tuiken.mamlakat.exceptions.WikiApiException;
 import com.tuiken.mamlakat.model.Country;
 import com.tuiken.mamlakat.model.dtos.api.MonarchApiDto;
 import com.tuiken.mamlakat.model.dtos.api.UrlDto;
@@ -45,7 +46,7 @@ public class MonarchController {
     }
 
     @PostMapping(path = "/loadf/{country}/{quantity}")
-    public boolean loadFamilyNext(@PathVariable String country, @PathVariable int quantity) throws IOException, URISyntaxException {
+    public boolean loadFamilyNext(@PathVariable String country, @PathVariable int quantity) throws WikiApiException {
         Country countryObject = Country.valueOf(country);
         for (int i=0; i<quantity; i++) {
             workflowService.resolveFamilyNext(countryObject);
@@ -54,7 +55,7 @@ public class MonarchController {
     }
 
     @PostMapping(path = "/loadp/{country}/{quantity}")
-    public boolean loadRulerNext(@PathVariable String country, @PathVariable int quantity) throws IOException, URISyntaxException {
+    public boolean loadRulerNext(@PathVariable String country, @PathVariable int quantity) throws WikiApiException {
         Country countryObject = Country.valueOf(country);
         for (int i=0; i<quantity; i++) {
             workflowService.addToThroneNext(countryObject);
