@@ -50,4 +50,28 @@ public class AiResolverService {
         }
         return response;
     }
+
+    public String findGender(String name) {
+
+        String promtTemplate = """
+                Tell me if %s is male of female.
+                Provide response in JSON format only. 
+                The format should be a JSON object like {"gender": "MALE"} or {"gender": "MALE"}.
+                Return {"gender": "UNKNOWN"} if you can't decide. 
+                Make sure there are no newline characters in the JSON object response. 
+
+        """;
+        String prompt = String.format(promtTemplate, name);
+
+//        System.out.println(prompt);
+        String response = aiClient.call(prompt);
+        try {
+            JSONObject urlObject = new JSONObject(response);
+            response = urlObject.getString("gender");
+//            System.out.println(response);
+        } catch (JSONException e) {
+            response="";
+        }
+        return response;
+    }
 }

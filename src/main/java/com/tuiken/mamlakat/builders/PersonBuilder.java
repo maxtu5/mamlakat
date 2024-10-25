@@ -2,19 +2,13 @@ package com.tuiken.mamlakat.builders;
 
 import com.tuiken.mamlakat.exceptions.WikiApiException;
 import com.tuiken.mamlakat.model.*;
-import com.tuiken.mamlakat.service.MonarchRetriever;
-import com.tuiken.mamlakat.service.MonarchService;
-import com.tuiken.mamlakat.service.PersonRetriever;
-import com.tuiken.mamlakat.service.WikiService;
+import com.tuiken.mamlakat.service.*;
 import com.tuiken.mamlakat.utils.JsonUtils;
 import com.tuiken.mamlakat.utils.RedirectResolver;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -27,6 +21,7 @@ public class PersonBuilder {
     private final PersonRetriever personRetriever;
     private final MonarchService monarchService;
     private final MonarchRetriever monarchRetriever;
+    private final AiResolverService aiResolverService;
 
     public Monarch buildPerson(String url, Gender gender) {
         JSONArray jsonArray = null;
@@ -35,13 +30,13 @@ public class PersonBuilder {
         } catch (WikiApiException e) {
             return null;
         }
-        if (jsonArray==null || JsonUtils.readInfoboxes(jsonArray).size()==0) return null;
-        String realUrl=null;
+        if (jsonArray == null || JsonUtils.readInfoboxes(jsonArray).size() == 0) return null;
+        String realUrl = null;
         realUrl = realUrl == null ? url : realUrl;
 
         Monarch person = new Monarch(realUrl);
         person.setName(personRetriever.retrieveName(jsonArray));
-        person.setGender(gender==null ? Gender.fromTitle(person.getName()) : gender);
+        person.setGender(gender == null ? Gender.fromTitle(person.getName()) : gender);
         person.setBirth(personRetriever.retrieveOneDate(jsonArray, "Born"));
         person.setDeath(personRetriever.retrieveOneDate(jsonArray, "Died"));
         person.setHouse(personRetriever.retrieveHouses(jsonArray));
@@ -50,16 +45,21 @@ public class PersonBuilder {
         return person;
     }
 
-    public Monarch findOrCreateOptionalSave(String url, Country country, boolean save) throws WikiApiException {
+    public Monarch findOrCreateOptionalSave(String url, Country country, boolean save) {
         RedirectResolver resolver = new RedirectResolver();
         String resolvedUrl = resolver.resolve(url);
         System.out.println("Reading from source: " + resolvedUrl);
         Monarch monarch = monarchService.findByUrl(resolvedUrl);
-        JSONArray jsonArray = wikiService.read(resolvedUrl);
-
+        JSONArray jsonArray = null;
+        try {
+            jsonArray = wikiService.read(resolvedUrl);
+        } catch (WikiApiException e) {
+            return null;
+        }
         if (monarch != null) {
             System.out.println("Exists");
-            if (country!=null) {
+            if (country != null) {
+                // refresh reigns for country
                 List<Reign> reigns = monarchRetriever.retrieveReigns(jsonArray, country);
                 List<Reign> clearedReigns = monarch.getReigns().stream()
                         .filter(r -> !r.getCountry().equals(country))
@@ -71,26 +71,41 @@ public class PersonBuilder {
         } else {
             System.out.print("Attempting to create...");
             monarch = buildPerson(resolvedUrl, null);
-            if (monarch!=null) {
-                monarch.setGender(Gender.fromTitle(monarch.getName()));
+            if (monarch != null) {
                 if (country != null) {
                     List<Reign> reigns = monarchRetriever.retrieveReigns(jsonArray, country);
-                    Gender gender = reigns.stream()
-                            .map(Reign::getTitle)
-                            .filter(Objects::nonNull)
-                            .map(Gender::fromTitle)
-                            .filter(Objects::nonNull)
-                            .findFirst().orElse(null);
-                    if (gender != null) monarch.setGender(gender);
                     monarch.setReigns(reigns);
                 }
+                monarch.setGender(detectGender(monarch));
                 if (save) monarchService.saveMonarch(monarch);
             } else {
-                System.out.println("fail");
+                System.out.println("Create attempt failed");
             }
         }
 //        printMonarch(monarch, country, false);
         return monarch;
+    }
+
+    private Gender detectGender(Monarch monarch) {
+        Gender retval = Gender.fromTitle(monarch.getName());
+        if (retval == null) {
+            retval = monarch.getReigns().stream()
+                    .map(Reign::getTitle)
+                    .filter(Objects::nonNull)
+                    .map(Gender::fromTitle)
+                    .filter(Objects::nonNull)
+                    .findFirst().orElse(null);
+        }
+        if (retval==null) {
+            String aiResolved = aiResolverService.findGender(monarch.getName());
+            try {
+                retval= Gender.valueOf(aiResolved);
+            } catch (IllegalArgumentException e) {
+                System.out.println("UNKNOWN???");
+            }
+            System.out.println(monarch.getName() + " defined by AI as " + retval);
+        }
+        return retval;
     }
 
 }

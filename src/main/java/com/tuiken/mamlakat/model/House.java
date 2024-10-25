@@ -90,7 +90,9 @@ public enum House {
     BONAPARTE("Bonaparte"),
     MEDICI("Medici"),
     PORTUGUESE_BURGUNDY("Portuguese Burgundy"),
-    HOHENZOLLERN("Hohenzollern");
+    HOHENZOLLERN("Hohenzollern"),
+    AVIS("Avis"),
+    MENESES("Meneses");
 
     private final String label;
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -37,7 +38,13 @@ public class UnhandledRecordService {
                 .filter(r -> r.getSolution() != null)
                 .map(r->{
                     if (!r.getSolution().equals("kill")) {
-                        Monarch monarch = monarchService.findByUrl(URLDecoder.decode(r.getSolution()));
+                        Monarch parent = monarchService.findByUrl(r.getParentUrl());
+                        if (parent==null || parent.getGender()==null) {
+                            System.out.println("no gender or parent: " + r.getParentUrl());
+                            return null;
+                        }
+                        r.setSolution(URLDecoder.decode(r.getSolution()));
+                        Monarch monarch = monarchService.findByUrl(r.getSolution());
                         if (monarch==null) {
                             monarch = personBuilder.buildPerson(r.getSolution(), null);
                             if (monarch==null) return r;
@@ -47,7 +54,6 @@ public class UnhandledRecordService {
                         Provenence provenence = provenanceService.findById(monarch.getId());
                         if (provenence==null) {
                             provenence = new Provenence(monarch.getId());
-                            Monarch parent = monarchService.findByUrl(r.getParentUrl());
                             if (parent.getGender().equals(Gender.MALE)) {
                                 provenence.setFather(parent.getId());
                             }
@@ -60,6 +66,7 @@ public class UnhandledRecordService {
                     }
                     return r;
                 })
+                .filter(Objects::nonNull)
                 .filter(r->r.getSolution().equals("kill"))
                 .map(r -> r.getId())
                 .collect(Collectors.toList());
