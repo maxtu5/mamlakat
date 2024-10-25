@@ -30,6 +30,7 @@ public class DataRepairService {
     private final ThroneRoom throneRoom;
     private final PersonBuilder personBuilder;
     private final FamilyRetriever familyRetriever;
+    private final AiResolverService aiResolverService;
 
     @Transactional
     public boolean reloadReigns(String url, Country country) {
@@ -466,14 +467,30 @@ public class DataRepairService {
         monarchService.saveMonarch(monarch);
     }
 
+    @Transactional
     public void reportGender() {
-        List<Monarch> all = monarchService.loadAllMonarchs();
-        Map<String, Long> collect = all.stream()
+        List<Monarch> all = monarchService.loadAllMonarchs().stream()
                 .filter(m->m.getGender()==null)
+                .collect(Collectors.toList());
+        Map<String, Long> collect = all.stream()
                 .peek(m-> {
                     if (!Strings.isBlank(m.getName())) {
                         System.out.println(m.getName());
                         m.setGender(Gender.fromTitle(m.getName()));
+                        if (m.getGender()==null && !m.getReigns().isEmpty() && m.getReigns().get(0).getTitle()!=null) {
+                            m.setGender(Gender.fromTitle(m.getReigns().get(0).getTitle()));
+                        }
+                        if (m.getGender()==null) {
+                            String aiResolved = aiResolverService.findGender(m.getName());
+                            try {
+                                m.setGender(Gender.valueOf(aiResolved));
+                            } catch (IllegalArgumentException e) {
+                                System.out.println("UNKNOWN???");
+                            }
+                            System.out.println(m.getName());
+                            System.out.println(m.getGender()+"\n");
+                        }
+                        monarchService.saveMonarch(m);
                     }
                 })
                 .collect(Collectors.groupingBy(t-> t.getGender()==null? "NULL" : t.getGender().toString(), Collectors.counting()));

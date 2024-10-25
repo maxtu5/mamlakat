@@ -73,7 +73,18 @@ public class WikiService {
                     url, HttpMethod.POST, requestEntity, String.class);
             return response.getBody();
         } catch (RestClientResponseException e) {
-            throw new WikiApiException("Error reading from wiki API", e);
+            if (e.getStatusCode().equals(HttpStatus.UNAUTHORIZED)) {
+                tokenManager.refresh();
+                try {
+                    ResponseEntity<String> response = restTemplate.exchange(
+                            url, HttpMethod.POST, requestEntity, String.class);
+                    return response.getBody();
+                } catch (RestClientResponseException e1) {
+                    throw new WikiApiException("Error reading from wiki API", e1);
+                }
+            } else {
+                throw new WikiApiException("Error reading from wiki API", e);
+            }
         }
     }
 

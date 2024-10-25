@@ -1,7 +1,7 @@
 package com.tuiken.mamlakat.model;
 
 public enum Gender {
-    MALE(new String[]{"King ", "Emperor", "Prince ", "Duke", "Earl", "Lord", "Count "}),
+    MALE(new String[]{"King ", "Emperor", "Prince ", "Duke", "Earl", "Lord", "Count ", "Infante"}),
     FEMALE(new String[]{"Queen", "Empress", "Princess", "Duchess", "Lady", "Infanta","Viscountess", "Baroness", "Diana", "Landgravine", "Elizabeth", "Anne", "Countess"});
 
     Gender(String[] keywords) {

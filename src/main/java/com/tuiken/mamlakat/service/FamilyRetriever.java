@@ -34,7 +34,6 @@ public class FamilyRetriever {
     private final MonarchService monarchService;
     private final ProvenenceRepository provenenceRepository;
     private final WikiService wikiService;
-    private final PersonRetriever personRetriever;
     private final AiResolverService aiResolver;
     private final UnhandledRecordService unhandledRecordService;
     private final PersonBuilder personBuilder;
@@ -103,13 +102,7 @@ public class FamilyRetriever {
         if (!issueUrls.isEmpty()) {
             System.out.println("Wow, found it in simple way...");
             List<Monarch> retval = issueUrls.stream()
-                    .map(u -> {
-                        try {
-                            return personBuilder.findOrCreateOptionalSave(u, null, true);
-                        } catch (WikiApiException e) {
-                            throw new RuntimeException(e);
-                        }
-                    })
+                    .map(u -> personBuilder.findOrCreateOptionalSave(u, null, true))
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());
             System.out.println("* simple " + retval.size() + "/" + issueUrls.size());
@@ -127,6 +120,7 @@ public class FamilyRetriever {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
         List<String> names = JsonUtils.readFromValues(issue).stream()
+                .filter(s->!s.equals("Illegitimate:"))
                 .collect(Collectors.toList());
 
         int fuzzy = 0;
@@ -193,9 +187,7 @@ public class FamilyRetriever {
     }
 
     private String fuzzyFind(String name, Set<String> allNames) {
-//        if (se.equals("https://en.wikipedia.org/wiki/Prince_Harry,_Duke_of_Sussex")) {
-//            System.out.println("---");
-//        }
+
         String[] tokens_sample = Normalizer.normalize(name, Normalizer.Form.NFD)
                 .replaceAll("[^\\p{ASCII}]", "")
                 .replaceAll(",", "")

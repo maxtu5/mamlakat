@@ -23,6 +23,11 @@ public class RepairController {
         dataRepairService.provenanceCheckParents();
     }
 
+    @GetMapping(path = "/monarch/gender")
+    public void fixGender() {
+        dataRepairService.reportGender();
+    }
+
     @PostMapping(path = "/monarch/reload")
     public int monarchReload(@RequestBody String[] urls) {
         if (urls.length % 2 != 0 || urls.length==0) return 0;
