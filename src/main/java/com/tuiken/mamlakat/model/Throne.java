@@ -1,4 +1,4 @@
-package com.tuiken.mamlakat.model.dtos;
+package com.tuiken.mamlakat.model;
 
 import com.tuiken.mamlakat.model.Country;
 import com.tuiken.mamlakat.model.Monarch;

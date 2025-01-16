@@ -13,7 +13,10 @@ public enum Country {
     HOLY_ROMAN_EMPIRE(new String[]{"Holy Roman Emperor"}),
     TUSCANY(new String[]{"Tuscany", "Etruria"}),
     PORTUGAL(new String[]{"Portugal"}),
-    PRUSSIA(new String[]{"Prussia"});
+    PRUSSIA(new String[]{"Prussia"}),
+    FRANCE(new String[]{"France", "French", "Franks", "West Francia"}),
+    SICILY(new String[]{"Two Sicilies", "Sicily"}),
+    POLAND(new String[] {"Poland"});
 
     @Getter
     private final String[] keywords;

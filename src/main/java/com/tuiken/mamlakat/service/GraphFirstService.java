@@ -7,7 +7,7 @@ import com.tuiken.mamlakat.model.Country;
 import com.tuiken.mamlakat.model.Gender;
 import com.tuiken.mamlakat.model.Monarch;
 import com.tuiken.mamlakat.model.Reign;
-import com.tuiken.mamlakat.model.dtos.Throne;
+import com.tuiken.mamlakat.model.Throne;
 import com.tuiken.mamlakat.model.dtos.api.CopyToGraphTaskDto;
 import com.tuiken.mamlakat.model.graph.MonarchNode;
 import com.tuiken.mamlakat.model.graph.ReignNode;
@@ -38,28 +38,30 @@ public class GraphFirstService {
             thronnyRepository.save(throneNode);
     }
 //    @Transactional
-    public boolean copyToGraph(CopyToGraphTaskDto copyToGraphTaskDto) throws InterruptedException {
-        Throne throne = throneRoom.loadThroneByCountry(copyToGraphTaskDto.getCountry());
-        if (throne != null &&
-                copyToGraphTaskDto.getFrom() >= 0 &&
-                copyToGraphTaskDto.getFrom() < throne.getMonarchsIds().size() &&
-                copyToGraphTaskDto.getFrom() <= copyToGraphTaskDto.getTo() &&
-                copyToGraphTaskDto.getTo() < throne.getMonarchsIds().size()) {
-            // load or create  throne
-            ThroneNode throneNode = thronnyRepository.findByCountry(copyToGraphTaskDto.getCountry())
-                    .orElse(new ThroneNode(throne.getId().toString(), throne.getName(), throne.getCountry(), new HashSet<>(), null));
-            thronnyRepository.save(throneNode);
-            // get list of rulers and relatives
-            ReignNode lastReignNode = copyToGraphTaskDto.getFrom()==0 ? null : findLastReign(throneNode);
-            List<MonarchNode> openMonarchs = new ArrayList<>();
-            for (int i = copyToGraphTaskDto.getFrom(); i <= copyToGraphTaskDto.getTo(); i++) {
-                Monarch monarch = monarchService.loadMonarch(UUID.fromString(throne.getMonarchsIds().get(i)));
-                System.out.println("== Copy-" + i + " " + monarch.getName());
-                lastReignNode = saveMonarchToGraph(monarch, lastReignNode, throneNode, openMonarchs);
-                System.out.println("Wait....");
-                Thread.sleep(5000);
+    public boolean copyToGraph() throws InterruptedException {
+        List<Throne> allThrones = throneRoom.loadAllThrones();
+        for (Throne throne : allThrones) {
+//            if (throne != null &&
+//                    copyToGraphTaskDto.getFrom() >= 0 &&
+//                    copyToGraphTaskDto.getFrom() < throne.getMonarchsIds().size() &&
+//                    copyToGraphTaskDto.getFrom() <= copyToGraphTaskDto.getTo() &&
+//                    copyToGraphTaskDto.getTo() < throne.getMonarchsIds().size()) {
+//                // load or create  throne
+                ThroneNode throneNode = thronnyRepository.findByCountry(throne.getCountry())
+                        .orElse(new ThroneNode(throne.getId().toString(), throne.getName(), throne.getCountry(), new HashSet<>(), null));
+                thronnyRepository.save(throneNode);
+                // get list of rulers and relatives
+                ReignNode lastReignNode =  null;
+                List<MonarchNode> openMonarchs = new ArrayList<>();
+                for (int i = 0; i < throne.getMonarchsIds().size(); i++) {
+                    Monarch monarch = monarchService.loadMonarch(UUID.fromString(throne.getMonarchsIds().get(i)));
+                    System.out.println("== Copy-" + i + " " + monarch.getName());
+                    lastReignNode = saveMonarchToGraph(monarch, lastReignNode, throneNode, openMonarchs);
+                    System.out.println("Wait....");
+                    Thread.sleep(1000);
+                }
             }
-        }
+//        }
         return true;
     }
 
@@ -127,8 +129,7 @@ public class GraphFirstService {
                 reign.getEnd() == null ? null : reign.getEnd().atZone(ZoneId.systemDefault()).toLocalDate(),
                 reign.getCoronation()==null?null: reign.getCoronation().atZone(ZoneId.systemDefault()).toLocalDate(),
                 country,
-                monarch,
-                null, null);
+                null);
     }
 
     private MonarchNode createMonarchNode(Monarch monarch, List<MonarchNode> soFar) {

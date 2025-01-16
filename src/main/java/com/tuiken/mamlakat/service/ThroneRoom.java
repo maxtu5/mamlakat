@@ -1,10 +1,11 @@
 package com.tuiken.mamlakat.service;
 
+import com.tuiken.mamlakat.builders.PersonBuilder;
 import com.tuiken.mamlakat.dao.ThroneRepository;
 import com.tuiken.mamlakat.model.Country;
 import com.tuiken.mamlakat.model.Monarch;
 import com.tuiken.mamlakat.model.PersonStatus;
-import com.tuiken.mamlakat.model.dtos.Throne;
+import com.tuiken.mamlakat.model.Throne;
 import com.tuiken.mamlakat.model.dtos.api.MonarchMediumDto;
 import com.tuiken.mamlakat.model.dtos.api.ThroneDto;
 import jakarta.transaction.Transactional;
@@ -22,13 +23,23 @@ import java.util.stream.Collectors;
 public class ThroneRoom {
     private final ThroneRepository throneRepository;
     private final MonarchService monarchService;
-    public Throne createThrone(Country country, String name) {
+    private final PersonBuilder personBuilder;
+
+    @Transactional
+    public ThroneDto createThrone(Country country, String latestMonarchUrl, String name) {
         Throne throne = new Throne();
         throne.setCountry(country);
         throne.setName(name);
-        throneRepository.save(throne);
-        return throne;
+
+        Monarch monarch = personBuilder.findOrCreateOptionalSave(latestMonarchUrl, country, true);
+        if (monarch != null && monarch.getId() != null) {
+            throne.getMonarchsIds().add(monarch.getId().toString());
+            saveThrone(throne);
+            return new ThroneDto(throne.getId().toString(), throne.getName());
+        }
+        return null;
     }
+
     public Throne saveThrone(Throne throne) {
         return throneRepository.save(throne);
     }

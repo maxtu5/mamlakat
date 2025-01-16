@@ -27,43 +27,6 @@ class WorkflowServiceTest {
     @Autowired
     private UnhandledRecordService unhandledRecordService;
 
-    // CREATE NEW
-
-    @Test
-    void createThrone() throws WikiApiException {
-        UUID uuid = workflowService.createThrone(
-                Country.PRUSSIA,
-                "https://en.wikipedia.org/wiki/Wilhelm_II",
-                "Prussian monarchy");
-    }
-
-    // ===== ADD CONTENT ======
-
-    @Test
-    public void addToThroneByUrl() throws WikiApiException {
-        String url = "https://en.wikipedia.org/wiki/Leopold_II,_Holy_Roman_Emperor";
-        Country country = Country.TUSCANY;
-        workflowService.addToThroneByUrl(url, country);
-    }
-
-    @Test
-    public void addToThroneNext() throws WikiApiException {
-        Country country = Country.DENMARK;
-        workflowService.addToThroneNext(country);
-    }
-
-    @Test
-    void addToThroneLoop() throws WikiApiException {
-        Country country = Country.PRUSSIA;
-        workflowService.addToThroneLoop(country);
-    }
-
-    @Test
-    void resolveFamilyNext() throws WikiApiException {
-        Country country = Country.DENMARK;
-        workflowService.resolveFamilyNext(country);
-    }
-
     @Test
     void repairUnhandledDiacritics() {
         unhandledRecordService.repairUnhandledDiacritics();
@@ -83,7 +46,7 @@ class WorkflowServiceTest {
 
     @Test
     public void printMonarchs() {
-        Country country = Country.DENMARK;
+        Country country = Country.POLAND;
         workflowService.printAllMonarchs(country);
     }
 

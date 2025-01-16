@@ -4,10 +4,8 @@ import com.tuiken.mamlakat.dao.MonarchRepository;
 import com.tuiken.mamlakat.dto.graphcsv.MonarchDto;
 import com.tuiken.mamlakat.model.Monarch;
 import com.tuiken.mamlakat.model.PersonStatus;
-import com.tuiken.mamlakat.model.Provenence;
 import com.tuiken.mamlakat.model.Reign;
 import com.tuiken.mamlakat.model.dtos.api.MonarchApiDto;
-import com.tuiken.mamlakat.model.dtos.api.FamilyDto;
 import com.tuiken.mamlakat.model.dtos.api.ReignDto;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -113,7 +111,7 @@ public class MonarchService {
         return monarchRepository.findByUrl(latestMonarchUrl);
     }
 
-    public MonarchDto toTg(Monarch monarch) {
+    public MonarchDto toMonarchDto(Monarch monarch) {
         return MonarchDto.builder()
                 .id(monarch.getId().toString())
                 .name(monarch.getName().replace(',', '|'))
@@ -121,6 +119,7 @@ public class MonarchService {
                 .birth(monarch.getBirth() != null ? monarch.getBirth().atZone(ZoneId.systemDefault()).toLocalDate() : null)
                 .death(monarch.getDeath() != null ? monarch.getDeath().atZone(ZoneId.systemDefault()).toLocalDate() : null)
                 .url(monarch.getUrl())
+                .status(monarch.getStatus())
                 .build();
     }
 

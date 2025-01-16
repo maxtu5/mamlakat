@@ -9,7 +9,7 @@ import com.tuiken.mamlakat.dto.graphcsv.MonarchDto;
 import com.tuiken.mamlakat.model.Country;
 import com.tuiken.mamlakat.model.Monarch;
 import com.tuiken.mamlakat.model.Provenence;
-import com.tuiken.mamlakat.model.dtos.Throne;
+import com.tuiken.mamlakat.model.Throne;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ public class ExportService {
 
     @Transactional
     public void exportSample() throws Exception {
-        Country country = Country.ENGLAND;
+        Country country = Country.POLAND;
         Throne throne = throneRoom.loadThroneByCountry(country);
         if (throne != null) {
             Set<Monarch> allMonarchs = new HashSet<>();
@@ -56,7 +56,7 @@ public class ExportService {
 
             List<MonarchDto> peopleDtos = allMonarchs.stream()
                     .filter(Objects::nonNull)
-                    .map(monarchService::toTg).collect(Collectors.toList());
+                    .map(monarchService::toMonarchDto).collect(Collectors.toList());
             provenences = provenences.stream().filter(Objects::nonNull).collect(Collectors.toSet());
             List<ProvenenceDto> fatherDtos = provenences.stream()
                     .map(p -> p.getFather() != null ?

@@ -52,9 +52,9 @@ public class FamilyRetriever {
 
         // parents
         Provenence provenence = provenenceRepository.findById(root.getId()).orElse(null);
-        if (provenence!=null) {
-            if (provenence.getFather()!=null) configuration.setFatherId(provenence.getFather());
-            if (provenence.getMother()!=null) configuration.setMotherId(provenence.getMother());
+        if (provenence != null) {
+            if (provenence.getFather() != null) configuration.setFatherId(provenence.getFather());
+            if (provenence.getMother() != null) configuration.setMotherId(provenence.getMother());
         }
 
         List<JSONObject> father = JsonUtils.drillForName(infoboxes, "Father");
@@ -64,7 +64,7 @@ public class FamilyRetriever {
                 .findFirst().orElse(null);
 
         RedirectResolver resolver = new RedirectResolver();
-        if (fatherUrl!=null) {
+        if (fatherUrl != null) {
             fatherUrl = resolver.resolve(fatherUrl);
             configuration.setFatherUrl(fatherUrl);
         }
@@ -74,16 +74,16 @@ public class FamilyRetriever {
                 .map(this::convertChildLink)
                 .filter(Objects::nonNull)
                 .findFirst().orElse(null);
-        if (motherUrl!=null) {
+        if (motherUrl != null) {
             motherUrl = resolver.resolve(motherUrl);
             configuration.setMotherUrl(motherUrl);
         }
         // children
-        List<Provenence> issueP = root.getGender() ==Gender.MALE ?
+        List<Provenence> issueP = root.getGender() == Gender.MALE ?
                 provenenceRepository.findByFather(root.getId()) :
                 provenenceRepository.findByMother(root.getId());
         configuration.setIssueIds(issueP.stream()
-                .map(p->p.getId())
+                .map(p -> p.getId())
                 .collect(Collectors.toList()));
 
         List<Monarch> childrenSaved = extractIssueFromWikiValidatedWithCreate(jsonArray, root, rootCountry);
@@ -93,7 +93,7 @@ public class FamilyRetriever {
 
     public List<Monarch> extractIssueFromWikiValidatedWithCreate(JSONArray jsonArray, Monarch root, Country rootCountry) throws WikiApiException {
         List<JSONObject> infoboxes = JsonUtils.readInfoboxes(jsonArray);
-        List<JSONObject> issue = JsonUtils.drillForName(infoboxes, "Issue detail", "Issue", "Issue more...", "Illegitimate children Detail", "Issue among others...", "Illegitimate children more...");
+        List<JSONObject> issue = JsonUtils.drillForName(infoboxes, "Issue detail", "Issue", "Issue more...","Issue More", "Illegitimate children Detail", "Issue among others...", "Illegitimate children more...");
 
         List<String> issueUrls = JsonUtils.readFromLinks(issue, "url").stream()
                 .map(this::convertChildLink)
@@ -120,7 +120,7 @@ public class FamilyRetriever {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
         List<String> names = JsonUtils.readFromValues(issue).stream()
-                .filter(s->!s.equals("Illegitimate:"))
+                .filter(s -> !s.equals("Illegitimate:"))
                 .collect(Collectors.toList());
 
         int fuzzy = 0;
@@ -131,7 +131,7 @@ public class FamilyRetriever {
             String foundUrl = fuzzyFind(name, allLinks);
             if (!Strings.isBlank(foundUrl)) {
                 Monarch newPerson = personBuilder.findOrCreateOptionalSave(foundUrl, null, true);
-                if (newPerson!=null) {
+                if (newPerson != null) {
                     fuzzy++;
                     retval.add(newPerson);
                 }
@@ -163,18 +163,26 @@ public class FamilyRetriever {
                     .map(this::convertChildLink)
                     .filter(Objects::nonNull)
                     .findFirst().orElse(null);
-            RedirectResolver resolver = new RedirectResolver();
-            fatherUrl = resolver.resolve(fatherUrl);
-            return parent.getUrl().equals(fatherUrl);
+            if (fatherUrl!=null) {
+                RedirectResolver resolver = new RedirectResolver();
+                fatherUrl = resolver.resolve(fatherUrl);
+                return parent.getUrl().equals(fatherUrl);
+            } else {
+                return false;
+            }
         } else {
             List<JSONObject> mother = JsonUtils.drillForName(infoboxes, "Mother");
             String motherUrl = JsonUtils.readFromLinks(mother, "url").stream()
                     .map(this::convertChildLink)
                     .filter(Objects::nonNull)
                     .findFirst().orElse(null);
-            RedirectResolver resolver = new RedirectResolver();
-            motherUrl = resolver.resolve(motherUrl);
-            return parent.getUrl().equals(motherUrl);
+            if (motherUrl!=null) {
+                RedirectResolver resolver = new RedirectResolver();
+                motherUrl = resolver.resolve(motherUrl);
+                return parent.getUrl().equals(motherUrl);
+            } else {
+                return false;
+            }
         }
     }
 
@@ -201,13 +209,13 @@ public class FamilyRetriever {
                     .split("_");
 
             int notFound = 0;
-            for (int i=0; i<tokens_sample.length; i++) {
+            for (int i = 0; i < tokens_sample.length; i++) {
                 String tofind = tokens_sample[i];
-                if (Arrays.stream(searched).noneMatch(ss->ss.equalsIgnoreCase(tofind))) {
+                if (Arrays.stream(searched).noneMatch(ss -> ss.equalsIgnoreCase(tofind))) {
                     notFound++;
                 }
             }
-            if (notFound<1) return path;
+            if (notFound < 1) return path;
         }
         return null;
     }
@@ -216,44 +224,44 @@ public class FamilyRetriever {
         System.out.println("=== LOADING ===");
         SaveFamilyConfiguration updates = new SaveFamilyConfiguration();
 
-        if (configuration.getRootId()== null || configuration.getRootUrl()==null ||
-                configuration.getIssueUrls()!=null && configuration.getRootGender()==null)
+        if (configuration.getRootId() == null || configuration.getRootUrl() == null ||
+                configuration.getIssueUrls() != null && configuration.getRootGender() == null)
             return updates;
 
         // parents
         Provenence provenence = new Provenence(configuration.getRootId());
         if (configuration.getFatherId() == null && configuration.getFatherUrl() != null) {
-            UUID father = extractRelative(configuration.getFatherUrl(), Gender.MALE, configuration.getRootId());
-            if (father!=null) {
+            UUID father = extractRelative(configuration.getFatherUrl(), Gender.MALE);
+            if (father != null) {
                 provenence.setFather(father);
             }
         }
         if (configuration.getMotherId() == null && configuration.getMotherUrl() != null) {
-            UUID mother = extractRelative(configuration.getMotherUrl(), Gender.FEMALE, configuration.getRootId());
-            if (mother!=null) {
+            UUID mother = extractRelative(configuration.getMotherUrl(), Gender.FEMALE);
+            if (mother != null) {
                 provenence.setMother(mother);
             }
         }
-        if (provenence.getFather()!=null || provenence.getMother()!=null) {
+        if (provenence.getFather() != null || provenence.getMother() != null) {
             updates.getToCreate().add(provenence);
         }
 
         // children
-        if (configuration.getIssueUrls()==null || configuration.getIssueUrls().isEmpty() ||
-                configuration.getIssueIds()!=null && configuration.getIssueIds().size() >= configuration.getIssueUrls().size())
+        if (configuration.getIssueUrls() == null || configuration.getIssueUrls().isEmpty() ||
+                configuration.getIssueIds() != null && configuration.getIssueIds().size() >= configuration.getIssueUrls().size())
             return updates;
 
         List<UUID> issue = new ArrayList<>();
         for (String url : configuration.getIssueUrls()) {
-            UUID uuid = extractRelative(url, null, configuration.getRootId());
-            if (uuid!=null) issue.add(uuid);
+            UUID uuid = extractRelative(url, null);
+            if (uuid != null) issue.add(uuid);
         }
 
-        for (UUID uuid: issue) {
+        for (UUID uuid : issue) {
             if (!configuration.getIssueIds().contains(uuid)) {
-                updates.getToCreate().add(configuration.getRootGender()==Gender.MALE ?
-                                Provenence.builder().id(uuid).father(configuration.getRootId()).build() :
-                                Provenence.builder().id(uuid).mother(configuration.getRootId()).build());
+                updates.getToCreate().add(configuration.getRootGender() == Gender.MALE ?
+                        Provenence.builder().id(uuid).father(configuration.getRootId()).build() :
+                        Provenence.builder().id(uuid).mother(configuration.getRootId()).build());
             }
         }
 
@@ -261,22 +269,15 @@ public class FamilyRetriever {
     }
 
     @Transactional
-    UUID extractRelative(String url, Gender gender, UUID relationId) {
-        Monarch monarch = null;
-        try {
-            monarch = monarchService.findByUrl(url);
-            if (monarch==null) {
-                monarch = personBuilder.buildPerson(url, gender);
-            }
-        } catch (Exception e) {
-            System.out.println("!!! Failure: " + url);
-            return null;
-        }
-        if (monarch!=null) {
-            if (monarch.getId()==null) {
+    UUID extractRelative(String url, Gender gender) {
+        Monarch monarch = monarchService.findByUrl(url);
+        monarch = monarch == null ? personBuilder.buildPerson(url, gender) : monarch;
+
+        if (monarch != null) {
+            if (monarch.getId() == null) {
                 System.out.println("== Saving: " + monarch.getUrl());
                 if (SAVE_FLAG) {
-                    save(monarch, relationId);
+                    save(monarch);
                 }
             } else {
                 System.out.println("== Exists: " + monarch.getUrl());
@@ -287,7 +288,7 @@ public class FamilyRetriever {
         return null;
     }
 
-    private void save(Monarch existParent, UUID relationId) {
+    private void save(Monarch existParent) {
         if (existParent != null) {
             monarchService.save(existParent);
         }
@@ -301,8 +302,8 @@ public class FamilyRetriever {
         String retval = src.contains("?") ? src.substring(0, src.indexOf("?")) : src;
 //        retval = Normalizer.normalize(retval, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
         if (retval.startsWith(SIMPLE_URL_PREFIX)) {
-                String[] tokens = retval.split("/");
-                retval = NORMAL_URL_PREFIX + tokens[tokens.length-1];
+            String[] tokens = retval.split("/");
+            retval = NORMAL_URL_PREFIX + tokens[tokens.length - 1];
         }
         return retval;
     }

@@ -41,7 +41,7 @@ public class MonarchRetriever {
 
         List<JSONObject> predecessor = JsonUtils.drillForName(list, "Predecessor");
 
-        if (predecessor.size() == 1) {
+        if (predecessor.size() >0) {
             return JsonUtils.readFromLinks(predecessor, "url").get(0);
         }
         return null;
@@ -97,13 +97,14 @@ public class MonarchRetriever {
                     .filter(o -> {
                         List<JSONObject> lissi = new ArrayList<>();
                         lissi.add(o);
-                        return JsonUtils.drillForName(lissi, "Reign").size() > 0;
+                        return JsonUtils.drillForName(lissi, "Reign").size() > 0 ||
+                                JsonUtils.drillForName(lissi, "1st reign").size() > 0;
                     })
                     .collect(Collectors.toList());
         }
 
         System.out.println("==found Title " + list.size());
-        if (list.size() == 1) {
+        if (list.size() >0) {
             return (String) list.get(0).get("name");
         }
         return null;

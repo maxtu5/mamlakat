@@ -1,7 +1,7 @@
 package com.tuiken.mamlakat.service;
 
 import com.tuiken.mamlakat.dao.ThroneRepository;
-import com.tuiken.mamlakat.model.dtos.Throne;
+import com.tuiken.mamlakat.model.Throne;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

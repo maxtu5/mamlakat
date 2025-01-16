@@ -1,0 +1,1134 @@
+[
+  {
+    "name": "Napoleon II",
+    "identifier": 62116,
+    "abstract": "Napoleon II was the disputed Emperor of the French for a few weeks in 1815. He was the son of Emperor Napoleon I and Empress Marie Louise, daughter of Emperor Francis I of Austria. Napoleon II had been Prince Imperial of France and King of Rome since birth. After the fall of his father, he lived the rest of his life in Vienna and was known in the Austrian court as Franz, Duke of Reichstadt for his adult life. He was posthumously given the nickname L'Aiglon. When Napoleon I tried to abdicate on 4 April 1814, he said that his son would rule as emperor. However, the coalition victors refused to acknowledge his son as successor, and Napoleon I was forced to abdicate unconditionally some days later. Although Napoleon II never actually ruled France, he was briefly the titular Emperor of the French after the second fall of his father. He died of tuberculosis at the age of 21. His cousin, Louis-Napoléon Bonaparte, founded the Second French Empire in 1852 and ruled as Emperor Napoleon III.",
+    "version": {
+      "identifier": 1252858627,
+      "comment": "[[User:Monkbot/task 20|Task 20]]: replace {lang-??} templates with {langx|??} [[Wikipedia:Templates_for_discussion/Log/2024_September_27#Replace_and_delete_lang-??_templates|‹See Tfd›]] (Replaced 1);",
+      "tags": [
+        "AWB"
+      ],
+      "is_minor_edit": true,
+      "scores": {
+        "revertrisk": {
+          "probability": {
+            "false": 0.9371791481971741,
+            "true": 0.06282085180282593
+          }
+        }
+      },
+      "editor": {
+        "identifier": 20483999,
+        "name": "Monkbot",
+        "edit_count": 3185193,
+        "groups": [
+          "bot",
+          "*",
+          "user",
+          "autoconfirmed"
+        ],
+        "is_bot": true,
+        "date_started": "2014-01-03T15:15:55Z"
+      },
+      "number_of_characters": 20070,
+      "size": {
+        "value": 20129,
+        "unit_text": "B"
+      },
+      "maintenance_tags": {}
+    },
+    "url": "https://en.wikipedia.org/wiki/Napoleon_II",
+    "date_created": "2002-07-14T18:04:07Z",
+    "date_modified": "2024-10-23T06:51:49Z",
+    "main_entity": {
+      "identifier": "Q7723",
+      "url": "https://www.wikidata.org/entity/Q7723"
+    },
+    "is_part_of": {
+      "identifier": "enwiki",
+      "url": "https://en.wikipedia.org"
+    },
+    "additional_entities": [
+      {
+        "identifier": "Q5",
+        "url": "https://www.wikidata.org/entity/Q5",
+        "aspects": [
+          "O"
+        ]
+      },
+      {
+        "identifier": "Q7723",
+        "url": "https://www.wikidata.org/entity/Q7723",
+        "aspects": [
+          "C",
+          "D.en",
+          "O",
+          "S",
+          "T"
+        ]
+      }
+    ],
+    "in_language": {
+      "identifier": "en"
+    },
+    "image": {
+      "content_url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Le_duc_de_Reichstadt.jpg",
+      "width": 706,
+      "height": 1049
+    },
+    "license": [
+      {
+        "name": "Creative Commons Attribution-ShareAlike License 4.0",
+        "identifier": "CC-BY-SA-4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    ],
+    "description": "Disputed Emperor of the French in 1815",
+    "infobox": [
+      {
+        "name": "Infobox royalty",
+        "type": "infobox",
+        "has_parts": [
+          {
+            "name": "Napoleon II",
+            "type": "section"
+          },
+          {
+            "name": "King of Rome Duke of Reichstadt",
+            "type": "section",
+            "has_parts": [
+              {
+                "type": "image",
+                "value": "Portrait by Leopold Bucher, 1832",
+                "values": [
+                  ""
+                ],
+                "images": [
+                  {
+                    "content_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Le_duc_de_Reichstadt.jpg/220px-Le_duc_de_Reichstadt.jpg",
+                    "caption": "Portrait by Leopold Bucher, 1832",
+                    "height": 220,
+                    "width": 220
+                  }
+                ],
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Leopold_Bucher",
+                    "text": "Leopold Bucher"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Emperor of the French",
+            "type": "section",
+            "has_parts": [
+              {
+                "name": "1st reign",
+                "type": "field",
+                "value": "4 – 6 April 1814",
+                "values": [
+                  ""
+                ]
+              },
+              {
+                "name": "Predecessor",
+                "type": "field",
+                "value": "Napoleon I",
+                "values": [
+                  ""
+                ],
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Napoleon_I",
+                    "text": "Napoleon I"
+                  }
+                ]
+              },
+              {
+                "name": "Successor",
+                "type": "field",
+                "value": "Napoleon I Louis XVIII (as King of France)",
+                "values": [
+                  ""
+                ],
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Louis_XVIII",
+                    "text": "Louis XVIII"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/King_of_France",
+                    "text": "King of France"
+                  }
+                ]
+              },
+              {
+                "name": "2nd reign",
+                "type": "field",
+                "value": "22 June – 7 July 1815",
+                "values": [
+                  ""
+                ],
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Abdication_of_Napoleon,_1815",
+                    "text": "2nd reign"
+                  }
+                ]
+              },
+              {
+                "name": "Predecessor",
+                "type": "field",
+                "value": "Napoleon I",
+                "values": [
+                  ""
+                ]
+              },
+              {
+                "name": "Successor",
+                "type": "field",
+                "value": "Napoleon III (1852, as Emperor) Louis XVIII (as King of France)",
+                "values": [
+                  ""
+                ],
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Napoleon_III",
+                    "text": "Napoleon III"
+                  }
+                ]
+              },
+              {
+                "name": "Regent",
+                "type": "field",
+                "value": "Joseph Fouché",
+                "values": [
+                  ""
+                ],
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/French_Provisional_Government_of_1815",
+                    "text": "Regent"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Joseph_Fouché",
+                    "text": "Joseph Fouché"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Head of the House of Bonaparte",
+            "type": "section",
+            "has_parts": [
+              {
+                "name": "Tenure",
+                "type": "field",
+                "value": "22 June 1815 – 22 July 1832",
+                "values": [
+                  ""
+                ]
+              },
+              {
+                "name": "Predecessor",
+                "type": "field",
+                "value": "Napoleon I",
+                "values": [
+                  ""
+                ]
+              },
+              {
+                "name": "Successor",
+                "type": "field",
+                "value": "Joseph Bonaparte",
+                "values": [
+                  ""
+                ],
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Joseph_Bonaparte",
+                    "text": "Joseph Bonaparte"
+                  }
+                ]
+              },
+              {
+                "name": "Born",
+                "type": "field",
+                "value": "20 March 1811 Tuileries Palace, Paris, French Empire",
+                "values": [
+                  ""
+                ],
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Tuileries_Palace",
+                    "text": "Tuileries Palace"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/First_French_Empire",
+                    "text": "French Empire"
+                  }
+                ]
+              },
+              {
+                "name": "Died",
+                "type": "field",
+                "value": "22 July 1832 (aged 21) Schönbrunn Palace, Vienna, Austrian Empire",
+                "values": [
+                  ""
+                ],
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Schönbrunn_Palace",
+                    "text": "Schönbrunn Palace"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Austrian_Empire",
+                    "text": "Austrian Empire"
+                  }
+                ]
+              },
+              {
+                "name": "Burial",
+                "type": "field",
+                "value": "Napoleon's tomb, Les Invalides",
+                "values": [
+                  ""
+                ],
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Napoleon's_tomb",
+                    "text": "Napoleon's tomb"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Names",
+            "type": "section"
+          },
+          {
+            "name": "Names",
+            "type": "section",
+            "has_parts": [
+              {
+                "type": "field",
+                "value": "French: Napoléon François Charles Joseph Bonaparte",
+                "values": [
+                  ""
+                ],
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/French_language",
+                    "text": "French"
+                  }
+                ]
+              },
+              {
+                "name": "House",
+                "type": "field",
+                "value": "Bonaparte",
+                "values": [
+                  ""
+                ],
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Dynasty",
+                    "text": "House"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/House_of_Bonaparte",
+                    "text": "Bonaparte"
+                  }
+                ]
+              },
+              {
+                "name": "Father",
+                "type": "field",
+                "value": "Napoleon I, Emperor of the French",
+                "values": [
+                  ""
+                ],
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Napoleon_I,_Emperor_of_the_French",
+                    "text": "Napoleon I, Emperor of the French"
+                  }
+                ]
+              },
+              {
+                "name": "Mother",
+                "type": "field",
+                "value": "Marie Louise, Duchess of Parma",
+                "values": [
+                  ""
+                ],
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Marie_Louise,_Duchess_of_Parma",
+                    "text": "Marie Louise, Duchess of Parma"
+                  }
+                ]
+              },
+              {
+                "name": "Religion",
+                "type": "field",
+                "value": "Roman Catholicism",
+                "values": [
+                  ""
+                ],
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Roman_Catholicism",
+                    "text": "Roman Catholicism"
+                  }
+                ]
+              },
+              {
+                "name": "Signature",
+                "type": "field",
+                "value": "Signature",
+                "values": [
+                  ""
+                ],
+                "images": [
+                  {
+                    "content_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Signature_of_Napoleon_II.png/125px-Signature_of_Napoleon_II.png",
+                    "alternative_text": "Napoleon II's signature",
+                    "height": 125,
+                    "width": 125
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "infobox",
+        "has_parts": [
+          {
+            "name": "Names",
+            "type": "section",
+            "has_parts": [
+              {
+                "type": "field",
+                "value": "French: Napoléon François Charles Joseph Bonaparte",
+                "values": [
+                  ""
+                ],
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/French_language",
+                    "text": "French"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "sections": [
+      {
+        "name": "Abstract",
+        "type": "section",
+        "has_parts": [
+          {
+            "type": "paragraph",
+            "value": "Napoleon II (Napoléon François Joseph Charles Bonaparte; 20 March 1811 – 22 July 1832) was the disputed Emperor of the French for a few weeks in 1815. He was the son of Emperor Napoleon I and Empress Marie Louise, daughter of Emperor Francis I of Austria. Napoleon II had been Prince Imperial of France and King of Rome since birth. After the fall of his father, he lived the rest of his life in Vienna and was known in the Austrian court as Franz, Duke of Reichstadt for his adult life (from the German version of his second given name, along with a title his grandfather granted him in 1818). He was posthumously given the nickname L'Aiglon (\"the Eaglet\").",
+            "links": [
+              {
+                "url": "https://en.wikipedia.org/wiki/Emperor_of_the_French",
+                "text": "Emperor of the French"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Napoleon_I",
+                "text": "Napoleon I"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Marie_Louise,_Duchess_of_Parma",
+                "text": "Marie Louise"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Francis_I_of_Austria",
+                "text": "Francis I of Austria"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Prince_Imperial_of_France",
+                "text": "Prince Imperial of France"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/List_of_heirs_to_the_French_throne",
+                "text": "King of Rome"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Vienna",
+                "text": "Vienna"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Austrian_Empire",
+                "text": "Austrian"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "value": "When Napoleon I tried to abdicate on 4 April 1814, he said that his son would rule as emperor. However, the coalition victors refused to acknowledge his son as successor, and Napoleon I was forced to abdicate unconditionally some days later. Although Napoleon II never actually ruled France, he was briefly the titular Emperor of the French after the second fall of his father. He died of tuberculosis at the age of 21.",
+            "links": [
+              {
+                "url": "https://en.wikipedia.org/wiki/Abdicate",
+                "text": "abdicate"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/War_of_the_Sixth_Coalition",
+                "text": "coalition victors"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Titular_ruler",
+                "text": "titular"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Tuberculosis",
+                "text": "tuberculosis"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "value": "His cousin, Louis-Napoléon Bonaparte, founded the Second French Empire in 1852 and ruled as Emperor Napoleon III.",
+            "links": [
+              {
+                "url": "https://en.wikipedia.org/wiki/Second_French_Empire",
+                "text": "Second French Empire"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Napoleon_III",
+                "text": "Napoleon III"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Biography",
+        "type": "section",
+        "has_parts": [
+          {
+            "name": "Birth",
+            "type": "section",
+            "has_parts": [
+              {
+                "type": "paragraph",
+                "value": "Napoleon ll was born on 20 March 1811, at the Tuileries Palace, the son of Emperor Napoleon I and Empress Marie Louise. On the same day he underwent ondoiement (a traditional French ceremony which is a simple baptism unaccompanied by the usual additional ceremonies) by Joseph Fesch with his full name of Napoleon François Charles Joseph. The baptism, inspired by the baptismal ceremony of Louis, Grand Dauphin of France, was held on 9 June 1811 in Notre Dame de Paris. Karl Philipp, Prince of Schwarzenberg, Austrian ambassador to France, wrote of the baptism:",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Tuileries_Palace",
+                    "text": "Tuileries Palace"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Napoleon_I",
+                    "text": "Napoleon I"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Marie_Louise,_Duchess_of_Parma",
+                    "text": "Marie Louise"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Joseph_Fesch",
+                    "text": "Joseph Fesch"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Louis,_Grand_Dauphin",
+                    "text": "Louis, Grand Dauphin"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Notre_Dame_de_Paris",
+                    "text": "Notre Dame de Paris"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Karl_Philipp,_Prince_of_Schwarzenberg",
+                    "text": "Karl Philipp, Prince of Schwarzenberg"
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "value": "The baptism ceremony was beautiful and impressive; the scene in which the emperor took the infant from the arms of his noble mother and raised him up twice to reveal him to the public was loudly applauded; in the monarch's manner and face could be seen the great satisfaction that he took from this solemn moment."
+              },
+              {
+                "type": "paragraph",
+                "value": "He was put in the care of Louise Charlotte Françoise de Montesquiou, a descendant of François-Michel le Tellier, Marquis de Louvois, who was named Governess of the Children of France. Affectionate and intelligent, the governess assembled a considerable collection of books intended to give the infant a strong grounding in religion, philosophy, and military matters.",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Louise_Charlotte_Françoise_de_Montesquiou",
+                    "text": "Louise Charlotte Françoise de Montesquiou"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/François-Michel_le_Tellier,_Marquis_de_Louvois",
+                    "text": "François-Michel le Tellier, Marquis de Louvois"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Governess_of_the_Children_of_France",
+                    "text": "Governess of the Children of France"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Succession rights",
+            "type": "section",
+            "has_parts": [
+              {
+                "type": "paragraph",
+                "value": "As the only legitimate son of Napoleon I, he was already constitutionally the Prince Imperial and heir apparent, but the Emperor also gave his son the title of King of Rome. Three years later, the First French Empire collapsed. Napoleon I saw his second wife and their son for the last time on 24 January 1814. On 4 April 1814, he abdicated in favour of his three-year-old son after the Six Days' Campaign and the Battle of Paris. The child became Emperor of the French under the regnal name of Napoleon II. However, on 6 April 1814, Napoleon I fully abdicated and renounced not only his own rights to the French throne, but also those of his descendants. The Treaty of Fontainebleau in 1814 gave the child the right to use the title of Prince of Parma, of Piacenza, and of Guastalla, and his mother was styled the Duchess of Parma, of Piacenza, and of Guastalla.",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Heir_apparent",
+                    "text": "heir apparent"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/King_of_the_Romans#First_French_Empire",
+                    "text": "King of Rome"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/First_French_Empire",
+                    "text": "First French Empire"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Six_Days'_Campaign",
+                    "text": "Six Days' Campaign"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Battle_of_Paris_(1814)",
+                    "text": "Battle of Paris."
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Emperor_of_the_French",
+                    "text": "Emperor of the French"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Regnal_name",
+                    "text": "regnal name"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Treaty_of_Fontainebleau_(1814)",
+                    "text": "Treaty of Fontainebleau"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Duchy_of_Parma",
+                    "text": "Duchess of Parma, of Piacenza, and of Guastalla"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Reign",
+            "type": "section",
+            "has_parts": [
+              {
+                "type": "paragraph",
+                "value": "On 29 March 1814, Marie Louise, accompanied by her entourage, left the Tuileries Palace with her son. Their first stop was the Château de Rambouillet; then, fearing the advancing enemy troops, they continued on to the Château de Blois. On 13 April, with her entourage much diminished, Marie Louise and her three-year-old son were back in Rambouillet, where they met her father, Emperor Francis I of Austria, and Emperor Alexander I of Russia. On 23 April, escorted by an Austrian regiment, mother and son left Rambouillet and France forever, for their exile in Austria.",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Tuileries_Palace",
+                    "text": "Tuileries Palace"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Château_de_Rambouillet",
+                    "text": "Château de Rambouillet"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Château_de_Blois",
+                    "text": "Château de Blois"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Francis_I_of_Austria",
+                    "text": "Francis I of Austria"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Alexander_I_of_Russia",
+                    "text": "Alexander I of Russia"
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "value": "In 1815, after his resurgence and his defeat at Waterloo, Napoleon I abdicated for the second time in favour of his four-year-old son, whom he had not seen since his exile to Elba. The day after Napoleon's abdication, a Commission of Government of five members took the rule of France, awaiting the return of the Bourbon King Louis XVIII, who was in Le Cateau-Cambrésis. The Commission held power for two weeks, but never formally summoned Napoleon II as Emperor or appointed a regent. The entrance of the Allies into Paris on 7 July brought a rapid end to his supporters' wishes. Napoleon II was residing in Austria with his mother.",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Hundred_Days",
+                    "text": "resurgence"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Battle_of_Waterloo",
+                    "text": "Waterloo"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Abdication_of_Napoleon,_1815",
+                    "text": "Napoleon I abdicated for the second time"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Elba",
+                    "text": "Elba"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/French_Provisional_Government_of_1815",
+                    "text": "Commission of Government"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Louis_XVIII",
+                    "text": "Louis XVIII"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Le_Cateau-Cambrésis",
+                    "text": "Le Cateau-Cambrésis"
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "value": "The next Bonaparte to ascend the throne of France, in 1852, would be Louis-Napoleon, the son of Napoleon's brother Louis I, King of Holland. He took the regnal name of Napoleon III.",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Louis_Bonaparte",
+                    "text": "Louis I, King of Holland"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Regnal_name",
+                    "text": "regnal name"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Napoleon_III",
+                    "text": "Napoleon III"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Life in Austria",
+            "type": "section",
+            "has_parts": [
+              {
+                "type": "paragraph",
+                "value": "From the spring of 1814 onwards, the young Napoleon lived in Austria and was known as \"Franz\", a German language cognate of his second given name, François. In 1818, he was awarded the title of Duke of Reichstadt by his maternal grandfather, Emperor Francis. He was educated by a staff of military tutors and developed a passion for soldiering, dressing in a miniature uniform like his father's and performing maneuvers in the palace. At the age of 8, it was apparent to his tutors that he had chosen his career.",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Cognate",
+                    "text": "cognate"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Zákupy#Duke_of_Reichstadt",
+                    "text": "Duke of Reichstadt"
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "value": "By 1820, Napoleon had completed his elementary studies and begun his military training, learning German, Italian and mathematics as well as receiving advanced physical training. His official army career began at age 12, in 1823, when he was made a cadet in the Austrian Army. Accounts from his tutors describe Napoleon as intelligent, serious, and focused. Additionally, he was very tall, having grown to nearly 6 feet (1.8m) by the time he was 17.",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/German_language",
+                    "text": "German"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Italian_language",
+                    "text": "Italian"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Mathematics",
+                    "text": "mathematics"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Imperial_Austrian_Army_(1806–1867)",
+                    "text": "Austrian Army"
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "value": "In 1822 the Four Sergeants of La Rochelle were put to death for attempting to return Napoleon II to the throne, although it is unclear to what extent they were committed Bonapartists. There is no evidence that Napoleon II endorsed the insurrection.",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Four_Sergeants_of_La_Rochelle",
+                    "text": "Four Sergeants of La Rochelle"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Bonapartists",
+                    "text": "Bonapartists"
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "value": "His budding military career gave some concern and fascination to the monarchies of Europe and French leaders over his possible return to France. However, he was allowed to play no political role and instead was used by Austrian Chancellor Klemens von Metternich in bargaining with France to gain advantage for Austria. Fearful of anyone in the Bonaparte family regaining political power, Metternich even rejected a request for Franz to move to a warmer climate in Italy. He received another rejection when his grandfather refused to allow him to join the army traveling to Italy to put down a rebellion.",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/State_Chancellor_of_the_Austrian_Empire",
+                    "text": "Chancellor"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Klemens_von_Metternich",
+                    "text": "Klemens von Metternich"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Italy",
+                    "text": "Italy"
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "value": "Upon the death of his stepfather, Adam Albert von Neipperg, and the revelation that his mother had borne two illegitimate children to Neipperg prior to their marriage, Franz grew distant from his mother and felt that his Austrian family were holding him back to avoid political controversy. He said to his friend, Anton von Prokesch-Osten, \"If Joséphine had been my mother, my father would not have been buried at Saint Helena, and I should not be at Vienna. My mother is kind but weak; she was not the wife my father deserved\".",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Adam_Albert_von_Neipperg",
+                    "text": "Adam Albert von Neipperg"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Anton_von_Prokesch-Osten",
+                    "text": "Anton von Prokesch-Osten"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Joséphine_de_Beauharnais",
+                    "text": "Joséphine"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Saint_Helena",
+                    "text": "Saint Helena"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Death",
+        "type": "section",
+        "has_parts": [
+          {
+            "type": "paragraph",
+            "value": "In 1831, Franz was given command of an Austrian battalion, but he never got the chance to serve in any meaningful capacity. In 1832, he caught pneumonia and was bedridden for several months. His poor health eventually overtook him and on 22 July 1832 Franz died of tuberculosis at Schönbrunn Palace in Vienna. He had no children; thus the Napoleonic claim to the throne of France passed to his uncle Joseph Bonaparte and later to his cousin, Louis-Napoléon Bonaparte, who later founded and reigned over the Second French Empire, styling himself Napoleon III.",
+            "links": [
+              {
+                "url": "https://en.wikipedia.org/wiki/Pneumonia",
+                "text": "pneumonia"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Tuberculosis",
+                "text": "tuberculosis"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Schönbrunn_Palace",
+                "text": "Schönbrunn Palace"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Vienna",
+                "text": "Vienna"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Joseph_Bonaparte",
+                "text": "Joseph Bonaparte"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Napoleon_III",
+                "text": "Louis-Napoléon Bonaparte"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Second_French_Empire",
+                "text": "Second French Empire"
+              }
+            ]
+          },
+          {
+            "name": "Disposition of his remains",
+            "type": "section",
+            "has_parts": [
+              {
+                "type": "paragraph",
+                "value": "On 15 December 1940, Adolf Hitler ordered the remains of Napoleon II to be transferred from Vienna to the dome of Les Invalides in Paris. The remains of Napoleon I had been returned to France in December 1840, at the time of the July Monarchy. In December 1969, the remains of Napoleon II were moved underground to the cella of Napoleon's tomb.",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Adolf_Hitler",
+                    "text": "Adolf Hitler"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Les_Invalides",
+                    "text": "Les Invalides"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Retour_des_cendres",
+                    "text": "returned to France"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/July_Monarchy",
+                    "text": "July Monarchy"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Cella",
+                    "text": "cella"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Napoleon's_tomb",
+                    "text": "Napoleon's tomb"
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "value": "While most of his remains were transferred to Paris in 1940, his heart and intestines remained in Vienna, which is traditional for members of the Habsburg family. His heart is in Urn 42 of the Herzgruft ('Heart Crypt'), and his viscera are in Urn 76 of the Ducal Crypt.",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Habsburg",
+                    "text": "Habsburg"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Herzgruft",
+                    "text": "Herzgruft"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Ducal_Crypt,_Vienna",
+                    "text": "Ducal Crypt"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Legacy",
+        "type": "section",
+        "has_parts": [
+          {
+            "type": "list",
+            "has_parts": [
+              {
+                "type": "list_item",
+                "value": "In 1900, Edmond Rostand wrote a play, L'Aiglon, about his life.",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Edmond_Rostand",
+                    "text": "Edmond Rostand"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/L'Aiglon",
+                    "text": "L'Aiglon"
+                  }
+                ]
+              },
+              {
+                "type": "list_item",
+                "value": "Serbian composer Petar Stojanović composed the operetta Napoleon II: Herzog von Reichstadt, which premiered in Vienna in the 1920s.",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Serbia",
+                    "text": "Serbian"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Petar_Stojanović_(composer)",
+                    "text": "Petar Stojanović"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Napoleon_II:_Herzog_von_Reichstadt?action=edit\u0026redlink=1",
+                    "text": "Napoleon II: Herzog von Reichstadt"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Vienna",
+                    "text": "Vienna"
+                  }
+                ]
+              },
+              {
+                "type": "list_item",
+                "value": "Victor Tourjansky directed a French-language film titled L'Aiglon in 1931, and he also directed a separate German-language version.",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Victor_Tourjansky",
+                    "text": "Victor Tourjansky"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/The_Eaglet_(1931_film)",
+                    "text": "L'Aiglon"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/The_Duke_of_Reichstadt_(1931_film)",
+                    "text": "German-language version"
+                  }
+                ]
+              },
+              {
+                "type": "list_item",
+                "value": "Arthur Honegger and Jacques Ibert collaborated on an opera, L'Aiglon, which premiered in 1937.",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Arthur_Honegger",
+                    "text": "Arthur Honegger"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Jacques_Ibert",
+                    "text": "Jacques Ibert"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Classical_music_written_in_collaboration",
+                    "text": "collaborated"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/L'Aiglon_(opera)",
+                    "text": "L'Aiglon"
+                  }
+                ]
+              },
+              {
+                "type": "list_item",
+                "value": "The journalist Henri Rochefort joked that Napoleon II, having never really governed, was France's best leader, since he brought no war, taxes or tyranny.",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Henri_Rochefort",
+                    "text": "Henri Rochefort"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "value": "He was noted for his friendship with Sophie, a Bavarian princess of the House of Wittelsbach. Intelligent, ambitious and strong-willed, Sophie had little in common with her husband Franz Karl, the brother of Napoleon II's mother, Empress Marie Louise. There were rumors of a love affair between Sophie and Napoleon II, as well as the possibility that Sophie's second son, Maximilian I of Mexico, born in 1832, was the result issue of the affair.",
+            "links": [
+              {
+                "url": "https://en.wikipedia.org/wiki/Princess_Sophie_of_Bavaria",
+                "text": "Sophie"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/House_of_Wittelsbach",
+                "text": "House of Wittelsbach"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Archduke_Franz_Karl_of_Austria",
+                "text": "Franz Karl"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Maximilian_I_of_Mexico",
+                "text": "Maximilian I of Mexico"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Honours",
+        "type": "section",
+        "has_parts": [
+          {
+            "type": "list",
+            "has_parts": [
+              {
+                "type": "list_item",
+                "value": "Austrian Empire: Knight Grand Cross of the Order of Saint Stephen, 1811",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Austrian_Empire",
+                    "text": "Austrian Empire"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Knight",
+                    "text": "Knight"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Grand_Cross",
+                    "text": "Grand Cross"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Order_of_Saint_Stephen_of_Hungary",
+                    "text": "Order of Saint Stephen"
+                  }
+                ]
+              },
+              {
+                "type": "list_item",
+                "value": "First French Empire: Grand Eagle of the Legion of Honour",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/First_French_Empire",
+                    "text": "First French Empire",
+                    "images": [
+                      {
+                        "content_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_France_%281794%E2%80%931815%2C_1830%E2%80%931974%2C_2020%E2%80%93present%29.svg/23px-Flag_of_France_%281794%E2%80%931815%2C_1830%E2%80%931974%2C_2020%E2%80%93present%29.svg.png",
+                        "alternative_text": "First French Empire",
+                        "height": 23,
+                        "width": 23
+                      }
+                    ]
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/First_French_Empire",
+                    "text": "First French Empire"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Legion_of_Honour",
+                    "text": "Legion of Honour"
+                  }
+                ]
+              },
+              {
+                "type": "list_item",
+                "value": "Kingdom of Italy: Knight of the Order of the Iron Crown, 1st Class",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Napoleonic_Kingdom_of_Italy",
+                    "text": "Kingdom of Italy"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Order_of_the_Iron_Crown",
+                    "text": "Order of the Iron Crown"
+                  }
+                ]
+              },
+              {
+                "type": "list_item",
+                "value": "Duchy of Parma: Knight Grand Cross of the Sacred Military Constantinian Order of Saint George",
+                "links": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Duchy_of_Parma",
+                    "text": "Duchy of Parma"
+                  },
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Sacred_Military_Constantinian_Order_of_Saint_George",
+                    "text": "Sacred Military Constantinian Order of Saint George"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Sources",
+        "type": "section",
+        "has_parts": [
+          {
+            "type": "list",
+            "has_parts": [
+              {
+                "type": "list_item",
+                "value": "Welschinger, Le roi de Rome, 1811–32, (Paris, 1897)"
+              },
+              {
+                "type": "list_item",
+                "value": "Wertheimer, The Duke of Reichstadt, (London, 1905)"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
