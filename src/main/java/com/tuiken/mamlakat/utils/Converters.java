@@ -5,7 +5,8 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 
 public class Converters {
+
     public static LocalDate toLocalDate(Instant source) {
-        return source.atZone(ZoneId.systemDefault()).toLocalDate();
+        return source != null ? source.atZone(ZoneId.systemDefault()).toLocalDate() : null;
     }
 }

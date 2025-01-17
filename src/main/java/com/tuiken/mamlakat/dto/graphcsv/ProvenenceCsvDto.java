@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class ProvenenceDto {
+public class ProvenenceCsvDto {
     @CsvBindByPosition(position = 0)
     String id;
     @CsvBindByPosition(position = 1)

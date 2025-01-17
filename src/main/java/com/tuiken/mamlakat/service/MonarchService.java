@@ -1,7 +1,6 @@
 package com.tuiken.mamlakat.service;
 
 import com.tuiken.mamlakat.dao.MonarchRepository;
-import com.tuiken.mamlakat.dto.graphcsv.MonarchDto;
 import com.tuiken.mamlakat.model.Monarch;
 import com.tuiken.mamlakat.model.PersonStatus;
 import com.tuiken.mamlakat.model.Reign;
@@ -111,17 +110,7 @@ public class MonarchService {
         return monarchRepository.findByUrl(latestMonarchUrl);
     }
 
-    public MonarchDto toMonarchDto(Monarch monarch) {
-        return MonarchDto.builder()
-                .id(monarch.getId().toString())
-                .name(monarch.getName().replace(',', '|'))
-                .gender(monarch.getGender()!=null ? monarch.getGender().toString() : null)
-                .birth(monarch.getBirth() != null ? monarch.getBirth().atZone(ZoneId.systemDefault()).toLocalDate() : null)
-                .death(monarch.getDeath() != null ? monarch.getDeath().atZone(ZoneId.systemDefault()).toLocalDate() : null)
-                .url(monarch.getUrl())
-                .status(monarch.getStatus())
-                .build();
-    }
+
 
     public List<Monarch> loadAllMonarchs() {
         List<Monarch> retval = new ArrayList<>();
