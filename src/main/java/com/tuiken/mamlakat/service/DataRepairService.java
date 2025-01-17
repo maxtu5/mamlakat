@@ -3,7 +3,7 @@ package com.tuiken.mamlakat.service;
 import com.tuiken.mamlakat.builders.PersonBuilder;
 import com.tuiken.mamlakat.exceptions.WikiApiException;
 import com.tuiken.mamlakat.model.*;
-import com.tuiken.mamlakat.model.dtos.Throne;
+import com.tuiken.mamlakat.model.Throne;
 import com.tuiken.mamlakat.utils.JsonUtils;
 import com.tuiken.mamlakat.utils.RedirectResolver;
 import jakarta.transaction.Transactional;

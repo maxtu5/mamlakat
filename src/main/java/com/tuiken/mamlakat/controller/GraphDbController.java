@@ -17,7 +17,7 @@ public class GraphDbController {
 
     @GetMapping(path = "/e")
     public boolean experimental(@RequestBody CopyToGraphTaskDto copyToGraphTaskDto) throws InterruptedException {
-        graphFirstService.copyToGraph(copyToGraphTaskDto);
+        graphFirstService.copyToGraph();
         return true;
     }
 }

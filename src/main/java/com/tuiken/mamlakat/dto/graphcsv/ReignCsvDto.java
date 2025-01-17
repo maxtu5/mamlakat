@@ -1,33 +1,34 @@
 package com.tuiken.mamlakat.dto.graphcsv;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByPosition;
+import com.tuiken.mamlakat.model.Country;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.Instant;
 import java.time.LocalDate;
 
 @Data
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MonarchDto {
+public class ReignCsvDto {
+
     @CsvBindByPosition(position = 0)
-    @CsvBindByName(column = "id")
-    String id;
+    private String country;
     @CsvBindByPosition(position = 1)
-    @CsvBindByName(column = "name")
-    String name;
+    private String monarchId;
     @CsvBindByPosition(position = 2)
-    @CsvBindByName(column = "birth")
-    LocalDate birth;
+    private String title;
     @CsvBindByPosition(position = 3)
-    @CsvBindByName(column = "death")
-    LocalDate death;
+    private LocalDate start;
     @CsvBindByPosition(position = 4)
-    @CsvBindByName(column = "url")
-    String url;
+    private LocalDate end;
     @CsvBindByPosition(position = 5)
-    @CsvBindByName(column = "gender")
-    String gender;
+    private LocalDate coronation;
+    @CsvBindByPosition(position = 6)
+    private String predecessorId;
+
 }

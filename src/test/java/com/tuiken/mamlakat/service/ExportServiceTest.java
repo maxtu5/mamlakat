@@ -14,6 +14,6 @@ class ExportServiceTest {
 
     @Test
     void exportSample() throws Exception {
-        exportService.exportSample();
+        exportService.exportAll();
     }
 }

@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
 import org.springframework.stereotype.Service;
 
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -46,6 +47,7 @@ public class PersonBuilder {
     }
 
     public Monarch findOrCreateOptionalSave(String url, Country country, boolean save) {
+        url = URLDecoder.decode(url);
         RedirectResolver resolver = new RedirectResolver();
         String resolvedUrl = resolver.resolve(url);
         System.out.println("Reading from source: " + resolvedUrl);

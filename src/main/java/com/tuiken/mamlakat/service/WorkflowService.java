@@ -6,7 +6,8 @@ import com.tuiken.mamlakat.dao.ThroneRepository;
 import com.tuiken.mamlakat.dao.WikiCacheRecordRepository;
 import com.tuiken.mamlakat.exceptions.WikiApiException;
 import com.tuiken.mamlakat.model.*;
-import com.tuiken.mamlakat.model.dtos.Throne;
+import com.tuiken.mamlakat.model.Throne;
+import com.tuiken.mamlakat.model.dtos.api.ThroneDto;
 import com.tuiken.mamlakat.model.workflows.LoadFamilyConfiguration;
 import com.tuiken.mamlakat.model.workflows.SaveFamilyConfiguration;
 import com.tuiken.mamlakat.utils.JsonUtils;
@@ -43,20 +44,6 @@ public class WorkflowService {
     private final PersonBuilder personBuilder;
 
     // ============== ADD DATA ========================
-
-    @Transactional
-    public UUID createThrone(Country country, String latestMonarchUrl, String name) throws WikiApiException {
-        Throne throne = throneRoom.createThrone(country, name);
-
-        Monarch monarch = personBuilder.findOrCreateOptionalSave(latestMonarchUrl, country, true);
-
-        if (monarch != null && monarch.getId() != null) {
-            throne.getMonarchsIds().add(monarch.getId().toString());
-            throneRoom.saveThrone(throne);
-            return throne.getId();
-        }
-        return null;
-    }
 
     @Transactional
     public void addToThroneLoop(Country country) throws WikiApiException {
@@ -110,26 +97,35 @@ public class WorkflowService {
     }
 
     @Transactional
-    public void addToThroneByUrl(String url, Country country) throws WikiApiException {
+    public ThroneDto addToThroneByUrl(String url, Country country) {
         Throne throne = throneRoom.loadThroneByCountry(country);
         if (throne != null) {
             Monarch monarch = personBuilder.findOrCreateOptionalSave(url, country, true);
             throne.getMonarchsIds().add(monarch.getId().toString());
             throneRoom.saveThrone(throne);
         }
+        return new ThroneDto(throne.getId().toString(), throne.getName());
     }
 
     @Transactional
-    public void resolveFamilyNext(Country country) throws WikiApiException {
+    public void resolveFamilyNext(Country country, int depth) throws WikiApiException {
         Throne throne = throneRoom.loadThroneByCountry(country);
         if (throne != null && throne.getMonarchsIds().size()>0) {
-            Monarch latest = monarchService.loadMonarch(UUID.fromString(throne.getMonarchsIds().get(0)));
-            int checked =0;
-            while (!latest.getStatus().equals(PersonStatus.NEW_URL) && checked<throne.getMonarchsIds().size()) {
-                checked++;
-                latest = monarchService.loadMonarch(UUID.fromString(throne.getMonarchsIds().get(checked)));
+            List<Monarch> toResolve = new ArrayList<>();
+            Monarch m = findFirstToResolve(throne.getMonarchsIds().get(0), depth);
+            if (m!= null && m.getStatus().equals(PersonStatus.NEW_URL)) {
+                toResolve.add(m);
             }
-            if (latest.getStatus().equals(PersonStatus.NEW_URL)) {
+            int checked =0;
+            while (checked < throne.getMonarchsIds().size() - 1 && toResolve.size()==0 && checked<throne.getMonarchsIds().size()) {
+                checked++;
+                m = findFirstToResolve(throne.getMonarchsIds().get(checked), depth);
+                if (m!=null && m.getStatus().equals(PersonStatus.NEW_URL)) {
+                    toResolve.add(m);
+                }
+            }
+            if (toResolve.size()>0) {
+                Monarch latest = toResolve.get(0);
                 System.out.println(String.format("\n+++ Loading family for %s +++", latest.getName()));
 
                 Monarch simplified = new Monarch(latest.getUrl());
@@ -156,6 +152,45 @@ public class WorkflowService {
                 }
             }
         }
+    }
+
+    private Monarch findFirstToResolve(String id, int depth) {
+        Monarch monarch = monarchService.loadMonarch(UUID.fromString(id));
+        if (monarch.getStatus().equals(PersonStatus.NEW_URL)) {
+            return monarch;
+        }
+        int level = 1;
+        List<Monarch> previousLevel = new ArrayList<>();
+        previousLevel.add(monarch);
+        while (level<=depth) {
+            List<Monarch> newPreviousLevel = new ArrayList<>();
+            for (Monarch current: previousLevel) {
+                Monarch father = provenanceService.findFather(current);
+                if (father!=null) {
+                    if (father.getStatus().equals(PersonStatus.NEW_URL)) {
+                        return father;
+                    }
+                    newPreviousLevel.add(father);
+                }
+                Monarch mother = provenanceService.findMother(current);
+                if (mother!=null) {
+                    if (mother.getStatus().equals(PersonStatus.NEW_URL)) {
+                        return mother;
+                    }
+                    newPreviousLevel.add(mother);
+                }
+                Set<Monarch> childeren = provenanceService.findChildren(monarch);
+                for (Monarch child: childeren) {
+                    if (child.getStatus().equals(PersonStatus.NEW_URL)) {
+                        return child;
+                    }
+                    newPreviousLevel.add(child);
+                }
+            }
+            previousLevel = newPreviousLevel;
+            level++;
+        }
+        return null;
     }
 
 

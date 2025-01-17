@@ -25,10 +25,6 @@ public class ReignNode {
     private LocalDate end;
     private LocalDate coronation;
     private Country country;
-    @Relationship(type = "WAS_MONARCH", direction = OUTGOING)
-    private MonarchNode monarch;
     @Relationship(type = "PREDECESSOR", direction = OUTGOING)
     private ReignNode predecessor;
-    @Relationship(type = "SUCCESSOR", direction = OUTGOING)
-    private ReignNode successor;
 }

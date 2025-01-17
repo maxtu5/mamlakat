@@ -3,6 +3,8 @@ package com.tuiken.mamlakat.controller;
 import com.tuiken.mamlakat.exceptions.WikiApiException;
 import com.tuiken.mamlakat.model.Country;
 import com.tuiken.mamlakat.model.dtos.api.MonarchApiDto;
+import com.tuiken.mamlakat.model.dtos.api.ThroneDto;
+import com.tuiken.mamlakat.model.dtos.api.ThroneOperationDto;
 import com.tuiken.mamlakat.model.dtos.api.UrlDto;
 import com.tuiken.mamlakat.service.MonarchService;
 import com.tuiken.mamlakat.service.ProvenanceService;
@@ -45,11 +47,11 @@ public class MonarchController {
         return monarchService.deleteMonarchs(toDelete);
     }
 
-    @PostMapping(path = "/loadf/{country}/{quantity}")
-    public boolean loadFamilyNext(@PathVariable String country, @PathVariable int quantity) throws WikiApiException {
+    @PostMapping(path = "/loadf/{country}/{depth}/{quantity}")
+    public boolean loadFamilyNext(@PathVariable String country, @PathVariable int quantity, @PathVariable int depth) throws WikiApiException {
         Country countryObject = Country.valueOf(country);
         for (int i=0; i<quantity; i++) {
-            workflowService.resolveFamilyNext(countryObject);
+            workflowService.resolveFamilyNext(countryObject, depth);
         }
         return true;
     }
@@ -61,6 +63,11 @@ public class MonarchController {
             workflowService.addToThroneNext(countryObject);
         }
         return true;
+    }
+
+    @PostMapping(path = "/loadpforce")
+    public ThroneDto loadRulerByUrl(@RequestBody ThroneOperationDto throneOperationDto) throws WikiApiException {
+        return workflowService.addToThroneByUrl(throneOperationDto.getLatestMonarchUrl(), throneOperationDto.getCountry());
     }
 
     @GetMapping(path = "/unhandled")

@@ -1,0 +1,26 @@
+LOAD CSV FROM "https://drive.google.com/uc?export=download&id=1UUyFWuEuhtPf-cKGpx8ZZRCORSbl3m_I" AS row
+MERGE  (a:Throne {id:row[0], country:row[2], name:row[1]})
+
+LOAD CSV FROM "https://drive.google.com/uc?export=download&id=1UUyFWuEuhtPf-cKGpx8ZZRCORSbl3m_I" AS row
+MERGE  (m:Monarch {id:row[0], gender:row[2], name:row[1], status:row[5], url:row[6]})
+SET (CASE WHEN row[3] <> "" THEN m END).birth = date(row[3])
+SET (CASE WHEN row[4] <> "" THEN m END).death = date(row[4])
+
+LOAD CSV FROM "https://drive.google.com/uc?export=download&id=1UUyFWuEuhtPf-cKGpx8ZZRCORSbl3m_I" AS row
+MATCH (m:Monarch {id: row[1]})
+MATCH (c:Monarch {id: row[0]})
+MERGE (m)-[:MOTHER_OF]->(c)
+
+LOAD CSV FROM "https://drive.google.com/uc?export=download&id=1UUyFWuEuhtPf-cKGpx8ZZRCORSbl3m_I" AS row
+MATCH (f:Monarch {id: row[1]})
+MATCH (c:Monarch {id: row[0]})
+MERGE (f)-[:FATHER_OF]->(c)
+
+"monarchId","title","start","end","coronation","country"
+LOAD CSV FROM "https://drive.google.com/uc?export=download&id=1UUyFWuEuhtPf-cKGpx8ZZRCORSbl3m_I" AS row
+MATCH (m:Monarch {id: row[0]})
+MATCH (t:Throne {country: row[5]})
+CREATE (m)-[:RULED_IN]->(r:Reign {title:row[1], country:row[5]})<-[:WAS_RULER]-(t)
+SET (CASE WHEN row[2] <> "" THEN r END).start = date(row[2])
+SET (CASE WHEN row[2] <> "" THEN r END).end = date(row[3])
+SET (CASE WHEN row[2] <> "" THEN r END).coronation = date(row[4])

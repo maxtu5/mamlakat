@@ -97,17 +97,18 @@ public class ProvenanceService {
         Provenence provenence = provenenceRepository.findById(monarch.getId()).orElse(null);
         FamilyDto family = new FamilyDto();
 
-        if (provenence.getFather()!=null) {
-            Monarch father = monarchService.loadMonarch(provenence.getFather());
-            ShortMonarchDto dad = new ShortMonarchDto(father.getName(), father.getUrl());
-            family.setFather(dad);
+        if (provenence!=null) {
+            if (provenence.getFather() != null) {
+                Monarch father = monarchService.loadMonarch(provenence.getFather());
+                ShortMonarchDto dad = new ShortMonarchDto(father.getName(), father.getUrl());
+                family.setFather(dad);
+            }
+            if (provenence.getMother() != null) {
+                Monarch mother = monarchService.loadMonarch(provenence.getMother());
+                ShortMonarchDto mum = new ShortMonarchDto(mother.getName(), mother.getUrl());
+                family.setMother(mum);
+            }
         }
-        if (provenence.getMother()!=null) {
-            Monarch mother = monarchService.loadMonarch(provenence.getMother());
-            ShortMonarchDto mum = new ShortMonarchDto(mother.getName(), mother.getUrl());
-            family.setFather(mum);
-        }
-
         Set<Monarch> children = findChildren(monarch);
         family.setChildren(children.stream()
                 .map(m->new ShortMonarchDto(m.getName(),m.getUrl())).collect(Collectors.toList()));

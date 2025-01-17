@@ -1,6 +1,7 @@
 package com.tuiken.mamlakat.controller;
 
 import com.tuiken.mamlakat.exceptions.WikiApiException;
+import com.tuiken.mamlakat.model.Country;
 import com.tuiken.mamlakat.service.DataRepairService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -34,5 +35,9 @@ public class RepairController {
         return dataRepairService.monarchsReload(urls);
     }
 
+    @PostMapping(path = "/monarch/reloadreigns/{country}")
+    public boolean monarchReloadReigns(@RequestBody String url, @PathVariable String country) {
+        return dataRepairService.reloadReigns(url, Country.valueOf(country));
+    }
 
 }
